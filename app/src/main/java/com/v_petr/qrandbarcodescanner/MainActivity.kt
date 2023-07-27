@@ -3,7 +3,6 @@ package com.v_petr.qrandbarcodescanner
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.google.android.material.navigation.NavigationBarView
 import com.v_petr.qrandbarcodescanner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,15 +16,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(root)
 
         val scannerFragment = ScannerFragment()
-        val lastScannedItemsFragment = LastScannedItemsFragment()
+        val historyFragment = HistoryFragment()
         val profileFragment = ProfileFragment()
 
         setCurrentFragment(scannerFragment)
+
         val bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.scanner -> setCurrentFragment(scannerFragment)
-                R.id.list -> setCurrentFragment(lastScannedItemsFragment)
+                R.id.history -> setCurrentFragment(historyFragment)
                 R.id.profile -> setCurrentFragment(profileFragment)
             }
             true
