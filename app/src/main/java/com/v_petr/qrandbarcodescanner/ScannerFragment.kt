@@ -5,14 +5,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanOptions
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 
 class ScannerFragment : Fragment() {
     private val TAG = "ScannerFragment"
     private var _binding: FragmentScannerBinding? = null
+
+    private lateinit var scanButton: Button
+
+
     private val binding get() = _binding!!
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentScannerBinding.inflate(inflater, container, false)
         val view = binding.root
         Log.d(TAG, "onCreateView: ")
@@ -32,8 +43,30 @@ class ScannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        scanButton = binding.scanButton
+        scanButton.setOnClickListener {
+            scanCode()
+        }
         Log.d(TAG, "onViewCreated: ")
     }
+
+    private fun scanCode() {
+        val options = ScanOptions()
+        options.setPrompt("Volume up to flash on")
+        options.setBeepEnabled(true)
+//        options.setOrientationLocked(true)
+        options.captureActivity = CaptureAct::class.java
+//        options.captureActivity = CaptureAct::class.java
+        barLauncher.launch(options)
+    }
+
+    private val barLauncher = registerForActivityResult(ScanContract()) {
+        if (it.contents != null) {
+            binding.tvScanResult.text = it.contents
+        }
+    }
+
 
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
