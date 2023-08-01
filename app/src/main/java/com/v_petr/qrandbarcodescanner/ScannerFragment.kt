@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
@@ -14,8 +14,7 @@ import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 class ScannerFragment : Fragment() {
     private val TAG = "ScannerFragment"
     private var _binding: FragmentScannerBinding? = null
-
-    private lateinit var scanButton: Button
+    private var currentQty:Int = 0
 
 
     private val binding get() = _binding!!
@@ -44,9 +43,32 @@ class ScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        scanButton = binding.scanButton
-        scanButton.setOnClickListener {
+        binding.scanButton.setOnClickListener {
             scanCode()
+        }
+
+        binding.buttonMinus.setOnClickListener {
+            try {
+                currentQty = binding.editTextNumber.text.toString().toInt()
+            } catch (ex: NumberFormatException){
+                Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show()
+            }
+            if (currentQty <= 0) {
+                binding.editTextNumber.setText("0")
+            } else {
+                currentQty--
+                binding.editTextNumber.setText(currentQty.toString())
+            }
+        }
+
+        binding.buttonPlus.setOnClickListener{
+            try {
+                currentQty = binding.editTextNumber.text.toString().toInt()
+            } catch (ex: NumberFormatException){
+                Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show()
+            }
+                currentQty++
+                binding.editTextNumber.setText(currentQty.toString())
         }
         Log.d(TAG, "onViewCreated: ")
     }
