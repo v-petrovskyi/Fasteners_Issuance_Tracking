@@ -7,12 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 
 class ScannerFragment : Fragment() {
-    private val TAG = "ScannerFragment"
+    companion object{
+        private const val TAG = "ScannerFragment"
+    }
     private var _binding: FragmentScannerBinding? = null
     private var currentQty: Int = 0
 
@@ -47,32 +51,44 @@ class ScannerFragment : Fragment() {
             scanCode()
         }
 
+        binding.buttonSave.setOnClickListener {
+            save();
+        }
+
         binding.buttonMinus.setOnClickListener {
             try {
-                currentQty = binding.editTextNumber.text.toString().toInt()
+                currentQty = binding.editTextQty.text.toString().toInt()
             } catch (ex: NumberFormatException) {
                 Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show()
             }
             currentQty--
             if (currentQty < 0) {
-                binding.editTextNumber.setText("0")
+                binding.editTextQty.setText("0")
                 Toast.makeText(activity, "Кількість не може бути менше 0", Toast.LENGTH_SHORT)
                     .show()
             } else {
-                binding.editTextNumber.setText(currentQty.toString())
+                binding.editTextQty.setText(currentQty.toString())
             }
         }
 
         binding.buttonPlus.setOnClickListener {
             try {
-                currentQty = binding.editTextNumber.text.toString().toInt()
+                currentQty = binding.editTextQty.text.toString().toInt()
             } catch (ex: NumberFormatException) {
                 Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show()
             }
             currentQty++
-            binding.editTextNumber.setText(currentQty.toString())
+            binding.editTextQty.setText(currentQty.toString())
         }
         Log.d(TAG, "onViewCreated: ")
+    }
+
+    private fun save() {
+        val database = Firebase.database("https://fastener-issuance-log-default-rtdb.europe-west1.firebasedatabase.app")
+        val myRef = database.getReference("FastenerIssuanceLog")
+        var record = FastenerIssuanceLog(binding.editTextPartBarcode.text.toString(), binding.editTextMaterialCode.text.toString(), currentQty )
+        Log.d(TAG, "save: $record")
+        myRef.push().setValue(record)
     }
 
     private fun scanCode() {
