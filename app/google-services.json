@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "170515669399",
+    "project_id": "fastener-issuance-log",
+    "storage_bucket": "fastener-issuance-log.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170515669399:android:6311f63f1fb9642f03e4d2",
+        "android_client_info": {
+          "package_name": "com.v_petr.qrandbarcodescanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170515669399-3tl4n09r822u0u00k22041bfqtph42el.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.v_petr.qrandbarcodescanner",
+            "certificate_hash": "50cfea8d3179a7f2d36062f8661d754e23beef55"
+          }
+        },
+        {
+          "client_id": "170515669399-p1r2lj48nflga3qlepv8tf192dat7mth.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjZZGw6a7H7X-fhg5tAGhQMN2zGx9Am80"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170515669399-p1r2lj48nflga3qlepv8tf192dat7mth.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
