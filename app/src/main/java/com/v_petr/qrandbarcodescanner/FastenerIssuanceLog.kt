@@ -3,10 +3,13 @@ package com.v_petr.qrandbarcodescanner
 import java.util.Calendar
 
 class FastenerIssuanceLog {
-    var partBarcode: String
-    var materialCode: String
-    var qty: Int
-    var dateTime: String
+    lateinit var partBarcode: String
+    lateinit var materialCode: String
+    var qty: Int = 0
+    lateinit var dateTime: String
+
+
+    constructor()
 
     constructor(
         partBarcode: String,
