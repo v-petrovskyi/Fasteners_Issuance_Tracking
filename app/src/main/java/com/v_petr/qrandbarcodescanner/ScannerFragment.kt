@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.journeyapps.barcodescanner.ScanContract
@@ -113,7 +114,7 @@ class ScannerFragment : Fragment() {
             builder.setMessage("Кількість становить 0. Все вірно?")
 
             builder.setPositiveButton("Yes") { dialog, which ->
-                myRef.push().setValue(record)
+                addRecordInDatabase(myRef, record)
                 dialog.dismiss() // Закрити діалогове вікно
             }
 
@@ -125,10 +126,20 @@ class ScannerFragment : Fragment() {
             alertDialog.show()
 
         } else{
-            myRef.push().setValue(record)
-
+            addRecordInDatabase(myRef, record)
         }
         Log.d(TAG, "save: $record")
+    }
+
+    private fun addRecordInDatabase(
+        myRef: DatabaseReference,
+        record: FastenerIssuanceLog
+    ) {
+        myRef.push().setValue(record).addOnSuccessListener {
+            Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Toast.makeText(context, "ERROR!!! DATA NOT SAVED", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun scanBarCode() {
