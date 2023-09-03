@@ -21,9 +21,10 @@ class ScannerFragment : Fragment() {
     }
 
     private var _binding: FragmentScannerBinding? = null
+    private val binding get() = _binding!!
     private var currentQty: Int = 0
 
-    private val binding get() = _binding!!
+    private lateinit var databaseReference: DatabaseReference
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -101,7 +102,7 @@ class ScannerFragment : Fragment() {
     private fun save() {
         val database =
             Firebase.database("https://fastener-issuance-log-default-rtdb.europe-west1.firebasedatabase.app")
-        val myRef = database.getReference("FastenerIssuanceLog")
+        databaseReference = database.getReference("FastenerIssuanceLog")
         var record = FastenerIssuanceLog(
             binding.editTextPartBarcode.text.toString(),
             binding.editTextMaterialCode.text.toString(),
@@ -114,7 +115,7 @@ class ScannerFragment : Fragment() {
             builder.setMessage("Кількість становить 0. Все вірно?")
 
             builder.setPositiveButton("Yes") { dialog, which ->
-                addRecordInDatabase(myRef, record)
+                addRecordInDatabase(databaseReference, record)
                 dialog.dismiss() // Закрити діалогове вікно
             }
 
@@ -126,7 +127,7 @@ class ScannerFragment : Fragment() {
             alertDialog.show()
 
         } else{
-            addRecordInDatabase(myRef, record)
+            addRecordInDatabase(databaseReference, record)
         }
         Log.d(TAG, "save: $record")
     }
