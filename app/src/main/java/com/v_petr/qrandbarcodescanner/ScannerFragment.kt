@@ -139,6 +139,7 @@ class ScannerFragment : Fragment() {
             Toast.makeText(context, "Data saved successfully", Toast.LENGTH_SHORT).show()
         }.addOnFailureListener {
             Toast.makeText(context, "ERROR!!! DATA NOT SAVED", Toast.LENGTH_LONG).show()
+            Log.e(TAG, "addRecordInDatabase: ${it.stackTrace}", )
         }
     }
 
