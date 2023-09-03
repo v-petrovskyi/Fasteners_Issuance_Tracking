@@ -6,31 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ScannerFragment">
 
-    <Button
-        android:id="@+id/scanButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Scan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/tvScanResult"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="@string/hello_blank_fragment"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextQty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="50dp"
         android:ems="8"
         android:inputType="number"
         android:minHeight="48dp"
@@ -38,7 +19,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonPlus"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonMinus"
-        app:layout_constraintTop_toBottomOf="@+id/scanButton" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewMaterialCode" />
 
     <Button
         android:id="@+id/buttonPlus"
@@ -63,63 +44,88 @@
         app:layout_constraintTop_toTopOf="@+id/editTextQty" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewPartBarcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Part Barcode"
-
+        android:layout_marginTop="50dp"
+        android:text="Part\nBarcode"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextPartBarcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Number"
         android:inputType="text"
         android:minHeight="48dp"
-        android:hint="Number"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPartBarcode"
+        app:layout_constraintEnd_toStartOf="@id/buttonScanPart"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/textViewPartBarcode" />
 
+
+    <Button
+        android:id="@+id/buttonScanPart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/baseline_document_scanner_24"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPartBarcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextPartBarcode"
+        app:layout_constraintTop_toTopOf="@+id/editTextPartBarcode"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewMaterialCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:text="Material code"
+        android:layout_marginTop="30dp"
+        android:text="Material\ncode"
+        android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanButton" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPartBarcode" />
 
     <EditText
         android:id="@+id/editTextMaterialCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Number"
         android:inputType="text"
         android:minHeight="48dp"
-        android:hint="Number"
         app:layout_constraintBottom_toBottomOf="@+id/textViewMaterialCode"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonScanMaterial"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/textViewMaterialCode" />
+
+    <Button
+        android:id="@+id/buttonScanMaterial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/baseline_qr_code_scanner_24"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextMaterialCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextMaterialCode"
+        app:layout_constraintTop_toTopOf="@+id/editTextMaterialCode"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="133dp" />
+        app:layout_constraintGuide_end="306dp" />
 
     <Button
         android:id="@+id/buttonSave"
@@ -128,21 +134,22 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"
         android:text="Save"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSaveAndScanNext"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSaveAndClear"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextQty" />
 
     <Button
-        android:id="@+id/buttonSaveAndScanNext"
+        android:id="@+id/buttonSaveAndClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save and scan"
+        android:text="Save and clear"
         app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonSave"
         app:layout_constraintTop_toTopOf="@+id/buttonSave"
         app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
