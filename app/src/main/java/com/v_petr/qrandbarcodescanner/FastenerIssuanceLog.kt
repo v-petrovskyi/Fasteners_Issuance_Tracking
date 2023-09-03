@@ -1,6 +1,6 @@
 package com.v_petr.qrandbarcodescanner
 
-import java.time.LocalDateTime
+import java.util.Calendar
 
 class FastenerIssuanceLog {
     var partBarcode: String
@@ -16,6 +16,6 @@ class FastenerIssuanceLog {
         this.partBarcode = partBarcode
         this.materialCode = materialCode
         this.qty = qty
-        this.dateTime = LocalDateTime.now().toString()
+        this.dateTime = Calendar.getInstance().time.toString()
     }
 }
