@@ -14,12 +14,12 @@ import com.journeyapps.barcodescanner.ScanOptions
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 
 class ScannerFragment : Fragment() {
-    companion object{
+    companion object {
         private const val TAG = "ScannerFragment"
     }
+
     private var _binding: FragmentScannerBinding? = null
     private var currentQty: Int = 0
-
 
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -47,12 +47,19 @@ class ScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.scanButton.setOnClickListener {
-            scanCode()
+        binding.buttonScanPart.setOnClickListener {
+            scanBarCode()
+        }
+        binding.buttonScanMaterial.setOnClickListener {
+            scanQrCode()
         }
 
         binding.buttonSave.setOnClickListener {
             save();
+        }
+        binding.buttonSaveAndClear.setOnClickListener {
+            save()
+            clearFields()
         }
 
         binding.buttonMinus.setOnClickListener {
@@ -83,27 +90,55 @@ class ScannerFragment : Fragment() {
         Log.d(TAG, "onViewCreated: ")
     }
 
+    private fun clearFields() {
+        binding.editTextQty.setText("0")
+        binding.editTextPartBarcode.setText("")
+        binding.editTextMaterialCode.setText("")
+    }
+
     private fun save() {
-        val database = Firebase.database("https://fastener-issuance-log-default-rtdb.europe-west1.firebasedatabase.app")
+        val database =
+            Firebase.database("https://fastener-issuance-log-default-rtdb.europe-west1.firebasedatabase.app")
         val myRef = database.getReference("FastenerIssuanceLog")
-        var record = FastenerIssuanceLog(binding.editTextPartBarcode.text.toString(), binding.editTextMaterialCode.text.toString(), currentQty )
+        if (currentQty <= 0) {
+            Toast.makeText(context, "qty is 0 or less", Toast.LENGTH_SHORT).show()
+        }
+        var record = FastenerIssuanceLog(
+            binding.editTextPartBarcode.text.toString(),
+            binding.editTextMaterialCode.text.toString(),
+            currentQty
+        )
         Log.d(TAG, "save: $record")
         myRef.push().setValue(record)
     }
 
-    private fun scanCode() {
+    private fun scanBarCode() {
         val options = ScanOptions()
         options.setPrompt("Volume up to flash on")
         options.setBeepEnabled(true)
 //        options.setOrientationLocked(true)
         options.captureActivity = CaptureAct::class.java
-//        options.captureActivity = CaptureAct::class.java
         barLauncher.launch(options)
     }
 
     private val barLauncher = registerForActivityResult(ScanContract()) {
         if (it.contents != null) {
-            binding.tvScanResult.text = it.contents
+            binding.editTextPartBarcode.setText(it.contents)
+        }
+    }
+
+    private fun scanQrCode() {
+        val options = ScanOptions()
+        options.setPrompt("Volume up to flash on")
+        options.setBeepEnabled(true)
+//        options.setOrientationLocked(true)
+        options.captureActivity = CaptureAct::class.java
+        qrLauncher.launch(options)
+    }
+
+    private val qrLauncher = registerForActivityResult(ScanContract()) {
+        if (it.contents != null) {
+            binding.editTextMaterialCode.setText(it.contents)
         }
     }
 
