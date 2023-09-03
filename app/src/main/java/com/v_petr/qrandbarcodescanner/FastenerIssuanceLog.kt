@@ -18,4 +18,10 @@ class FastenerIssuanceLog {
         this.qty = qty
         this.dateTime = Calendar.getInstance().time.toString()
     }
+
+    override fun toString(): String {
+        return "FastenerIssuanceLog(partBarcode='$partBarcode', materialCode='$materialCode', qty=$qty)"
+    }
+
+
 }
