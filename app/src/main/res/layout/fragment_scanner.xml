@@ -70,11 +70,11 @@
         app:layout_constraintTop_toTopOf="@+id/textViewPartBarcode" />
 
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonScanPart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/baseline_document_scanner_24"
+        android:src="@drawable/baseline_document_scanner_24"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextPartBarcode"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,11 +108,11 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/textViewMaterialCode" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonScanMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/baseline_qr_code_scanner_24"
+        android:src="@drawable/baseline_qr_code_scanner_24"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextMaterialCode"
         app:layout_constraintEnd_toEndOf="parent"
