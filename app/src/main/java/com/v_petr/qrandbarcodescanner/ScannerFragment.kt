@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -100,16 +101,34 @@ class ScannerFragment : Fragment() {
         val database =
             Firebase.database("https://fastener-issuance-log-default-rtdb.europe-west1.firebasedatabase.app")
         val myRef = database.getReference("FastenerIssuanceLog")
-        if (currentQty <= 0) {
-            Toast.makeText(context, "qty is 0 or less", Toast.LENGTH_SHORT).show()
-        }
         var record = FastenerIssuanceLog(
             binding.editTextPartBarcode.text.toString(),
             binding.editTextMaterialCode.text.toString(),
             currentQty
         )
+        if (record.qty <= 0) {
+
+            val builder = AlertDialog.Builder(requireContext())
+
+            builder.setMessage("Кількість становить 0. Все вірно?")
+
+            builder.setPositiveButton("Yes") { dialog, which ->
+                myRef.push().setValue(record)
+                dialog.dismiss() // Закрити діалогове вікно
+            }
+
+            builder.setNegativeButton("No") { dialog, which ->
+                dialog.dismiss()
+            }
+
+            val alertDialog = builder.create()
+            alertDialog.show()
+
+        } else{
+            myRef.push().setValue(record)
+
+        }
         Log.d(TAG, "save: $record")
-        myRef.push().setValue(record)
     }
 
     private fun scanBarCode() {
