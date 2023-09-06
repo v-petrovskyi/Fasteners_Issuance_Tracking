@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
@@ -31,14 +32,16 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
 
     private val binding get() = _binding!!
     private lateinit var database: FirebaseDatabase
+    private lateinit var barcodesReference: DatabaseReference
 
-    private lateinit var uriBarcodesXLS: Uri
+    private lateinit var fileXlxBarcodes: FileDescriptor
 
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) {
-                uriBarcodesXLS = uri
-                binding.textViewSelectedFileName.text = uri.toString()
+                getFileDescriptorFromURI(uri)
+
+                binding.textViewSelectedFileName.text = uri.path
             }
         }
 
@@ -58,61 +61,69 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
         database =
             Firebase.database("https://fastener-issuance-log-default-rtdb.europe-west1.firebasedatabase.app")
 
-        val reference = database.reference
-
+        barcodesReference = database.reference.child("BarCodes")
 
         binding.buttonGetLast.setOnClickListener {
-            val postListener = object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    for (child in dataSnapshot.children) {
-                        val value = child.getValue<BarCode>()
-                        Log.d(TAG, "onDataChange: $value")
-                    }
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-
-                    Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-                }
-            }
-
-            val lastValue = reference.child("BarCodes")
-                .orderByKey()
-                .limitToLast(1)
-                .addListenerForSingleValueEvent(postListener)
-
-            Log.d(TAG, "onViewCreated: $lastValue")
-
+            getLastBarcodeInDatabase()
         }
         binding.buttonSelectFile.setOnClickListener {
             getContent.launch("application/vnd.ms-excel")
         }
         binding.buttonCleanBarcodes.setOnClickListener {
-            database.reference.child("BarCodes").setValue(null)
+            barcodesReference.setValue(null)
         }
 
         binding.buttonReadXLS.setOnClickListener {
-            Log.d(TAG, "onViewCreated: buttonReadXLS filePath = $uriBarcodesXLS")
-            val parcelFileDescriptor =
-                requireContext().contentResolver.openFileDescriptor(uriBarcodesXLS, "r")
-
-            val fileDescriptor = parcelFileDescriptor?.fileDescriptor
-            if (fileDescriptor != null) {
-                val barCodeList = readXLS(fileDescriptor)
-
+            if (fileXlxBarcodes != null) {
+                val barCodeList = readXLS(fileXlxBarcodes)
 
                 barCodeList.forEach {
-                    database.reference.child("BarCodes").child(it.barCode.toString())
+                    barcodesReference.child(it.barCode.toString())
                         .setValue(it)
                 }
             }
         }
 
     }
+
+    private fun getFileDescriptorFromURI(uri: Uri) {
+        val parcelFileDescriptor =
+            requireContext().contentResolver.openFileDescriptor(uri, "r")
+        if (parcelFileDescriptor != null) {
+            fileXlxBarcodes = parcelFileDescriptor.fileDescriptor
+        }
+
+    }
+
+    private fun getLastBarcodeInDatabase() {
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (child in dataSnapshot.children) {
+                    val value = child.getValue<BarCode>()
+                    if (value != null) {
+                        binding.textViewLastElement.text = value.barCode.toString()
+                    }
+                    Log.d(TAG, "onDataChange: $value")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+
+        val lastValue = barcodesReference
+            .orderByKey()
+            .limitToLast(1)
+            .addListenerForSingleValueEvent(postListener)
+        Log.d(TAG, "getLastBarcodeInDatabase: $lastValue")
+    }
+
     private fun readXLS(fileDescriptor: FileDescriptor): List<BarCode> {
         val list = mutableListOf<BarCode>()
 
         try {
+
             val inputStream = FileInputStream(fileDescriptor)
             val workbook = WorkbookFactory.create(inputStream)
 

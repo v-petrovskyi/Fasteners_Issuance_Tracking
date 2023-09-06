@@ -10,4 +10,5 @@
     <string name="app_title">Scanner</string>
     <string name="no_file_selected">Файл не вибрано</string>
     <string name="select_file">Вибрати файл</string>
+    <string name="last_element">last element</string>
 </resources>
