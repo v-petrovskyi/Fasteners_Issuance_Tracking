@@ -38,4 +38,23 @@
         app:layout_constraintTop_toBottomOf="@+id/button_select_file" />
 
 
+    <Button
+        android:id="@+id/buttonCleanBarcodes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="buttonCleanBarcodes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGetLast" />
+
+    <Button
+        android:id="@+id/buttonReadXLS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="buttonReadXLS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonCleanBarcodes" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
