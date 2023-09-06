@@ -5,4 +5,9 @@
     <string name="scanner">Scanner</string>
     <string name="history">History</string>
     <string name="profile">Profile</string>
+    <string name="addNewBarcodes">Добавити штрихкоди</string>
+    <string name="content_description_addNewBarcodes">завантаження штрихкодів креслень у базу даних</string>
+    <string name="app_title">Scanner</string>
+    <string name="no_file_selected">Файл не вибрано</string>
+    <string name="select_file">Вибрати файл</string>
 </resources>

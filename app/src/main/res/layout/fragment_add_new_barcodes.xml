@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="1000dp"
+    android:minHeight="1000dp"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/textView_selected_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_file_selected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_select_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_file"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_selected_file_name" />
+
+    <Button
+        android:id="@+id/buttonGetLast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get last"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_select_file" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
