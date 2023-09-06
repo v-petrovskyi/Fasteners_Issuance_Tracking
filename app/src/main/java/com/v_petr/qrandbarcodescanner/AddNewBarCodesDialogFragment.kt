@@ -138,4 +138,8 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
         return list
     }
 
+    override fun getTheme(): Int {
+        return R.style.DialogTheme
+    }
+
 }
