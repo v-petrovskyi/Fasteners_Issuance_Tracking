@@ -50,4 +50,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.2.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation("com.google.firebase:firebase-database-ktx")
+    implementation 'org.apache.poi:poi:5.0.0' // для читання xlx
 }
