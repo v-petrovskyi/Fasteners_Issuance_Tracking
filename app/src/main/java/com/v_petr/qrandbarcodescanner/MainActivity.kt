@@ -33,6 +33,18 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.add_new_barcodes_menu -> {
+                    val dialogFragment = AddNewBarCodesDialogFragment()
+                    dialogFragment.show(supportFragmentManager, "Add new barcodes")
+
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 
     private fun setCurrentFragment(fragment: Fragment) =
