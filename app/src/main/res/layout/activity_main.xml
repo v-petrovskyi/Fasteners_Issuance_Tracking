@@ -11,9 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/flFragment"
-        app:layout_constraintTop_toTopOf="parent"
-
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
@@ -21,20 +19,23 @@
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/top_app_bar"
             app:navigationIcon="@drawable/baseline_qr_code_scanner_24"
-            app:title="@string/app_title"
-
-
-            />
+            app:title="@string/app_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/material_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/flFragment"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/material_divider" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
