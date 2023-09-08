@@ -2,6 +2,7 @@ package com.v_petr.qrandbarcodescanner
 
 import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -36,12 +37,23 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
 
     private lateinit var fileXlxBarcodes: FileDescriptor
 
+
     private val getContent =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) {
                 getFileDescriptorFromURI(uri)
-
-                binding.textViewSelectedFileName.text = uri.path
+            }
+            uri?.let { returnUri ->
+                requireActivity().contentResolver.query(returnUri, null, null, null, null)
+            }?.use { cursor ->
+                val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                val sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE)
+                cursor.moveToFirst()
+                val fileName = cursor.getString(nameIndex)
+                val fileSize = cursor.getLong(sizeIndex)
+                binding.textViewSelectedFileName.text = buildString {
+                    append(fileName).append(" ").append(fileSize)
+                }
             }
         }
 
