@@ -4,9 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.database.DataSnapshot
@@ -17,7 +15,6 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import com.v_petr.qrandbarcodescanner.databinding.FragmentAddNewBarcodesBinding
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import java.io.FileDescriptor
 import java.io.FileInputStream
@@ -29,9 +26,7 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
         private const val TAG = "AddNewBarCodesDialogFragment"
     }
 
-    private var _binding: FragmentAddNewBarcodesBinding? = null
 
-    private val binding get() = _binding!!
     private lateinit var database: FirebaseDatabase
     private lateinit var barcodesReference: DatabaseReference
 
@@ -51,20 +46,12 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
                 cursor.moveToFirst()
                 val fileName = cursor.getString(nameIndex)
                 val fileSize = cursor.getLong(sizeIndex)
-                binding.textViewSelectedFileName.text = buildString {
-                    append(fileName).append(" ").append(fileSize)
-                }
+//                binding.textViewSelectedFileName.text = buildString {
+//                    append(fileName).append(" ").append(fileSize)
+//                }
             }
         }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAddNewBarcodesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,26 +62,26 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
 
         barcodesReference = database.reference.child("BarCodes")
 
-        binding.buttonGetLast.setOnClickListener {
-            getLastBarcodeInDatabase()
-        }
-        binding.buttonSelectFile.setOnClickListener {
-            getContent.launch("application/vnd.ms-excel")
-        }
-        binding.buttonCleanBarcodes.setOnClickListener {
-            barcodesReference.setValue(null)
-        }
-
-        binding.buttonReadXLS.setOnClickListener {
-            if (fileXlxBarcodes != null) {
-                val barCodeList = readXLS(fileXlxBarcodes)
-
-                barCodeList.forEach {
-                    barcodesReference.child(it.barCode.toString())
-                        .setValue(it)
-                }
-            }
-        }
+//        binding.buttonGetLast.setOnClickListener {
+//            getLastBarcodeInDatabase()
+//        }
+//        binding.buttonSelectFile.setOnClickListener {
+//            getContent.launch("application/vnd.ms-excel")
+//        }
+//        binding.buttonCleanBarcodes.setOnClickListener {
+//            barcodesReference.setValue(null)
+//        }
+//
+//        binding.buttonReadXLS.setOnClickListener {
+//            if (fileXlxBarcodes != null) {
+//                val barCodeList = readXLS(fileXlxBarcodes)
+//
+//                barCodeList.forEach {
+//                    barcodesReference.child(it.barCode.toString())
+//                        .setValue(it)
+//                }
+//            }
+//        }
 
     }
 
@@ -113,7 +100,7 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
                 for (child in dataSnapshot.children) {
                     val value = child.getValue<BarCode>()
                     if (value != null) {
-                        binding.textViewLastElement.text = value.barCode.toString()
+//                        binding.textViewLastElement.text = value.barCode.toString()
                     }
                     Log.d(TAG, "onDataChange: $value")
                 }

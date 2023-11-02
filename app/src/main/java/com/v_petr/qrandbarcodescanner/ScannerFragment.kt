@@ -32,20 +32,14 @@ class ScannerFragment : Fragment() {
     ): View? {
         _binding = FragmentScannerBinding.inflate(inflater, container, false)
         val view = binding.root
-        Log.d(TAG, "onCreateView: ")
         return view
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d(TAG, "onDestroyView: ")
         _binding = null
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: ")
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -175,39 +169,5 @@ class ScannerFragment : Fragment() {
     }
 
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        Log.d(TAG, "onViewStateRestored: ")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart: ")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume: ")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause: ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop: ")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d(TAG, "onSaveInstanceState: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy: ")
-    }
 
 }

@@ -40,10 +40,6 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "onCreate: ")
-    }
 
     @SuppressLint("Range")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,16 +85,16 @@ class ProfileFragment : Fragment() {
 //
 ////            Log.d(TAG, "onViewCreated: $key")
 //        }
-        binding.buttonUpdate.setOnClickListener {
-            reference.child("users").child("25").child("materialCode").setValue("updated material")
-        }
-        binding.buttonGet.setOnClickListener {
-            reference.child("users").child("25").get().addOnSuccessListener {
-                Log.i("firebase", "Got value ${it.value}")
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-            }
-        }
+//        binding.buttonUpdate.setOnClickListener {
+//            reference.child("users").child("25").child("materialCode").setValue("updated material")
+//        }
+//        binding.buttonGet.setOnClickListener {
+//            reference.child("users").child("25").get().addOnSuccessListener {
+//                Log.i("firebase", "Got value ${it.value}")
+//            }.addOnFailureListener {
+//                Log.e("firebase", "Error getting data", it)
+//            }
+//        }
 
 
 //        binding.buttonGetUri.setOnClickListener {
@@ -160,38 +156,4 @@ class ProfileFragment : Fragment() {
 //        return list
 //    }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        Log.d(TAG, "onViewStateRestored: ")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart: ")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume: ")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause: ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop: ")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.d(TAG, "onSaveInstanceState: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG, "onDestroy: ")
-    }
 }
