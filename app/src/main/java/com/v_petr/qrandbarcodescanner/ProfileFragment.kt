@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.v_petr.qrandbarcodescanner.databinding.FragmentProfileBinding
+import com.v_petr.qrandbarcodescanner.databinding.FragmentProfileOldBinding
 
 
 class ProfileFragment : Fragment() {
     private val TAG = "ProfileFragment"
-    private var _binding: FragmentProfileBinding? = null
+    private var _binding: FragmentProfileOldBinding? = null
     private val binding get() = _binding!!
     private lateinit var database: FirebaseDatabase
     private lateinit var uriBarcodesXLS: Uri
@@ -28,7 +28,7 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileOldBinding.inflate(inflater, container, false)
         val view = binding.root
         Log.d(TAG, "onCreateView: ")
         return view

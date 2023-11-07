@@ -1,21 +1,9 @@
 package com.v_petr.qrandbarcodescanner
 
-import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanOptions
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 
-class ScannerFragment : Fragment() {
+class ScannerFragment {
     companion object {
         private const val TAG = "ScannerFragment"
     }
@@ -25,6 +13,7 @@ class ScannerFragment : Fragment() {
     private var currentQty: Int = 0
 
     private lateinit var databaseReference: DatabaseReference
+    /*
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,14 +24,13 @@ class ScannerFragment : Fragment() {
         return view
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.logRecord = FastenerIssuanceLog()
+
 
         binding.buttonScanPart.setOnClickListener {
             scanBarCode()
@@ -168,6 +156,6 @@ class ScannerFragment : Fragment() {
         }
     }
 
-
+*/
 
 }
