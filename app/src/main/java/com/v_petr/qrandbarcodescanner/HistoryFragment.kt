@@ -33,7 +33,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.testButton.setOnClickListener {
-            fastenerIssuanceLog.materialCode = "newmaterial"
+            fastenerIssuanceLog.setMaterialCode("newmaterial")
             Log.d(TAG, "onViewCreated: $fastenerIssuanceLog")
         }
     }

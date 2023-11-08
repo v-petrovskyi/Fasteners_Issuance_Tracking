@@ -20,12 +20,12 @@ class ScannerViewModel : ViewModel() {
     }
 
     fun increaseQty() {
-        fastenerIssuanceLog.qty = fastenerIssuanceLog.qty + 1
+        fastenerIssuanceLog.setQty(fastenerIssuanceLog.getQty() + 1)
         fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
     }
 
     fun decreaseQty() {
-        fastenerIssuanceLog.qty = fastenerIssuanceLog.qty - 1
+        fastenerIssuanceLog.setQty(fastenerIssuanceLog.getQty() - 1)
         fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
     }
 
