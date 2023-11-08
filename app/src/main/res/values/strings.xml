@@ -1,14 +1,20 @@
 <resources>
-    <string name="app_name">Fasteners Issuance Tracking</string>
+    <string name="app_name" translatable="false">Fasteners Issuance Tracking</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="scanner">Scanner</string>
     <string name="history">History</string>
     <string name="profile">Profile</string>
-    <string name="addNewBarcodes">Добавити штрихкоди</string>
-    <string name="content_description_addNewBarcodes">завантаження штрихкодів креслень у базу даних</string>
+    <string name="addNewBarcodes">Add barcodes to database</string>
+    <string name="content_description_addNewBarcodes">uploading data to database</string>
     <string name="app_title">Scanner</string>
-    <string name="no_file_selected">Файл не вибрано</string>
-    <string name="select_file">Вибрати файл</string>
+    <string name="no_file_selected">File is not selected</string>
+    <string name="select_file">Select file</string>
     <string name="last_element">last element</string>
+    <string name="part_barcode">Part Barcode</string>
+    <string name="number">Number</string>
+    <string name="material_code">Material code</string>
+    <string name="quantity">quantity</string>
+    <string name="save">Save</string>
+    <string name="save_and_clear">Save and clear</string>
 </resources>
