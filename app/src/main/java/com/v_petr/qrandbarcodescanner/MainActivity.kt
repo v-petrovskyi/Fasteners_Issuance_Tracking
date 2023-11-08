@@ -2,10 +2,12 @@ package com.v_petr.qrandbarcodescanner
 
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.v_petr.qrandbarcodescanner.databinding.ActivityMainBinding
 import com.v_petr.qrandbarcodescanner.fragments.ScannerFragment
+import com.v_petr.qrandbarcodescanner.viewmodel.ScannerViewModel
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -13,10 +15,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: ScannerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel.createNewFastenerIssuanceLog()
 
         val view = binding.root
         setContentView(view)

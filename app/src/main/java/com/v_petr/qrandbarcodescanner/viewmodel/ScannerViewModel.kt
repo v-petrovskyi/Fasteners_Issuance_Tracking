@@ -6,9 +6,13 @@ import com.v_petr.qrandbarcodescanner.FastenerIssuanceLog
 
 class ScannerViewModel : ViewModel() {
 
-    private var fastenerIssuanceLog = FastenerIssuanceLog("0", "0", 0)
-    private val fastenerIssuanceLogLiveData: MutableLiveData<FastenerIssuanceLog> by lazy { MutableLiveData<FastenerIssuanceLog>() }
+    private lateinit var fastenerIssuanceLog: FastenerIssuanceLog
+    private val fastenerIssuanceLogLiveData = MutableLiveData<FastenerIssuanceLog>()
     // TODO: Implement the ViewModel
+
+    fun createNewFastenerIssuanceLog() {
+        fastenerIssuanceLog = FastenerIssuanceLog()
+    }
 
     fun getCurrentFastenerIssuanceLog(): MutableLiveData<FastenerIssuanceLog> {
         fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
@@ -19,9 +23,11 @@ class ScannerViewModel : ViewModel() {
         fastenerIssuanceLog.qty = fastenerIssuanceLog.qty + 1
         fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
     }
+
     fun decreaseQty() {
         fastenerIssuanceLog.qty = fastenerIssuanceLog.qty - 1
         fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
     }
+
 
 }

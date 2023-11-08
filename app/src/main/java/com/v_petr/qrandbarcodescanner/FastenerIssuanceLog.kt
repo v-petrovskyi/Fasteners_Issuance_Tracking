@@ -1,10 +1,10 @@
 package com.v_petr.qrandbarcodescanner
 
 class FastenerIssuanceLog {
-    lateinit var partBarcode: String
-    lateinit var materialCode: String
+    var partBarcode: String = ""
+    var materialCode: String = ""
     var qty: Int = 0
-    private lateinit var dateTime: String
+    lateinit var dateTime: String
 
 
     constructor()
