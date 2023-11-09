@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/scannerFragment">
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.v_petr.qrandbarcodescanner.fragments.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.v_petr.qrandbarcodescanner.fragments.ScannerFragment"
+        android:label="ScannerFragment"
+        tools:layout="@layout/fragment_scanner"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.v_petr.qrandbarcodescanner.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
