@@ -1,9 +1,9 @@
 package com.v_petr.qrandbarcodescanner
 
-class BarCode {
-    var owner = ""
-    var order = ""
-    var barCode: Long = 0
+class PartCode {
+    private var owner = ""
+    private var order = ""
+    private var barCode: Long = 0
 
     constructor()
 

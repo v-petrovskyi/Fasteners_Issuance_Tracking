@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fasteners Issuance Tracking</string>
     <string name="scanner">Сканнер</string>
     <string name="history">Історія</string>
     <string name="profile">Профіль</string>
-    <string name="addNewBarcodes">Добавити штрихкоди в БД</string>
+    <string name="addNewBarcodes">Добавити штрихкоди деталей в БД</string>
     <string name="content_description_addNewBarcodes">завантаження даних в БД</string>
     <string name="app_title">Сканнер</string>
     <string name="no_file_selected">Файл не вибрано</string>
@@ -16,4 +15,5 @@
     <string name="quantity">к-сть</string>
     <string name="save">Зберегти</string>
     <string name="save_and_clear">Зберегти і очистити</string>
+    <string name="add_materials_codes_to_database">Добавити коди матеріалів у БД</string>
 </resources>

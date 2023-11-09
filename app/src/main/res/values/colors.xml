@@ -2,5 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="my_light_primary">#03A9F4</color>
+    <color name="my_light_primary1">#00A9FF</color>
+    <color name="my_light_primary2">#89CFF3</color>
+    <color name="my_light_primary3">#A0E9FF</color>
+    <color name="my_light_primary4">#CDF5FD</color>
+
 </resources>

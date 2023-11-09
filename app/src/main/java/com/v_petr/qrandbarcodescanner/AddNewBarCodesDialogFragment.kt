@@ -98,7 +98,7 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (child in dataSnapshot.children) {
-                    val value = child.getValue<BarCode>()
+                    val value = child.getValue<PartCode>()
                     if (value != null) {
 //                        binding.textViewLastElement.text = value.barCode.toString()
                     }
@@ -118,8 +118,8 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
         Log.d(TAG, "getLastBarcodeInDatabase: $lastValue")
     }
 
-    private fun readXLS(fileDescriptor: FileDescriptor): List<BarCode> {
-        val list = mutableListOf<BarCode>()
+    private fun readXLS(fileDescriptor: FileDescriptor): List<PartCode> {
+        val list = mutableListOf<PartCode>()
 
         try {
 
@@ -136,7 +136,7 @@ class AddNewBarCodesDialogFragment : DialogFragment() {
                 val order = currentRow.getCell(1).toString()
                 val barCode = currentRow.getCell(2).toString().toLong()
 
-                list.add(BarCode(owner, order, barCode))
+                list.add(PartCode(owner, order, barCode))
 
             }
 
