@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val view = binding.root
         setContentView(view)
-        val scannerFragment = ScannerFragment()
+        val scannerFragment = ScannerFragment.newInstance()
         val historyFragment = HistoryFragment()
         val profileFragment = ProfileFragment()
         setCurrentFragment(scannerFragment)

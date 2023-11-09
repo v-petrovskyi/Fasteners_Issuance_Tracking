@@ -1,7 +1,8 @@
-package com.v_petr.qrandbarcodescanner
+package com.v_petr.qrandbarcodescanner.models
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
+import com.v_petr.qrandbarcodescanner.BR
 
 class FastenerIssuanceLog : BaseObservable {
     private var partBarcode: String = ""

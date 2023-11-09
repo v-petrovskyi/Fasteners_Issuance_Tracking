@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.v_petr.qrandbarcodescanner.databinding.FragmentHistoryOldBinding
+import com.v_petr.qrandbarcodescanner.models.FastenerIssuanceLog
 
 class HistoryFragment : Fragment() {
     companion object {

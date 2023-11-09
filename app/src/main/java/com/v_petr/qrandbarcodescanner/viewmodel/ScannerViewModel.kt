@@ -2,7 +2,7 @@ package com.v_petr.qrandbarcodescanner.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.v_petr.qrandbarcodescanner.FastenerIssuanceLog
+import com.v_petr.qrandbarcodescanner.models.FastenerIssuanceLog
 
 class ScannerViewModel : ViewModel() {
 

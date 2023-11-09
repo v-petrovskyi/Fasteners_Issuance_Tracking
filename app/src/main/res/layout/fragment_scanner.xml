@@ -8,7 +8,7 @@
         <import type="com.v_petr.qrandbarcodescanner.utils.Converter"/>
         <variable
             name="logRecord"
-            type="com.v_petr.qrandbarcodescanner.FastenerIssuanceLog" />
+            type="com.v_petr.qrandbarcodescanner.models.FastenerIssuanceLog" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
