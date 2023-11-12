@@ -20,4 +20,14 @@
         android:name="com.v_petr.qrandbarcodescanner.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_new_material_codes_menu"
+        android:name="com.v_petr.qrandbarcodescanner.fragments.UploadingNewMaterialCodesFragment"
+        android:label="fragment_uploading_new_material_codes"
+        tools:layout="@layout/fragment_uploading_new_material_codes" />
+    <fragment
+        android:id="@+id/nav_new_part_codes_menu"
+        android:name="com.v_petr.qrandbarcodescanner.fragments.UploadingNewPartCodesFragment"
+        android:label="fragment_uploading_new_part_codes"
+        tools:layout="@layout/fragment_uploading_new_part_codes" />
 </navigation>
