@@ -6,6 +6,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.v_petr.qrandbarcodescanner.databinding.ActivityMainBinding
 import com.v_petr.qrandbarcodescanner.viewmodel.ScannerViewModel
@@ -30,10 +32,13 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(binding.fragmentContainerView.id) as NavHostFragment
         navController = navHostFragment.navController
         val bottomNavigationView = binding.bottomNavigationView
-//        setupWithNavController(bottomNavigationView, navController)
         bottomNavigationView.setupWithNavController(navController)
         val navigationDrawer = binding.navigationDrawer
-        navigationDrawer.setupWithNavController(navController)
+        val drawerLayout = binding.drawerLayout
+        val toolbar = binding.toolbar
+        val appBarConfiguration = AppBarConfiguration.Builder(navController.graph).setOpenableLayout(drawerLayout).build()
+        NavigationUI.setupWithNavController(navigationDrawer, navController)
+        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
 
     }
 

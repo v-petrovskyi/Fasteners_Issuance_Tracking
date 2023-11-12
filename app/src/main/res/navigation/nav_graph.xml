@@ -8,26 +8,26 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.v_petr.qrandbarcodescanner.fragments.HistoryFragment"
-        android:label="fragment_history"
+        android:label="History"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/scannerFragment"
         android:name="com.v_petr.qrandbarcodescanner.fragments.ScannerFragment"
-        android:label="ScannerFragment"
+        android:label="Scanner Fragment"
         tools:layout="@layout/fragment_scanner"/>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.v_petr.qrandbarcodescanner.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nav_new_material_codes_menu"
         android:name="com.v_petr.qrandbarcodescanner.fragments.UploadingNewMaterialCodesFragment"
-        android:label="fragment_uploading_new_material_codes"
+        android:label="Uploading new material codes"
         tools:layout="@layout/fragment_uploading_new_material_codes" />
     <fragment
         android:id="@+id/nav_new_part_codes_menu"
         android:name="com.v_petr.qrandbarcodescanner.fragments.UploadingNewPartCodesFragment"
-        android:label="fragment_uploading_new_part_codes"
+        android:label="Uploading new part codes"
         tools:layout="@layout/fragment_uploading_new_part_codes" />
 </navigation>
