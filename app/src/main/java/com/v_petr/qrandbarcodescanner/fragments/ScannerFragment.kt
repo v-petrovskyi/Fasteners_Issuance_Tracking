@@ -26,9 +26,8 @@ class ScannerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentScannerBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        _binding = FragmentScannerBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onDestroyView() {

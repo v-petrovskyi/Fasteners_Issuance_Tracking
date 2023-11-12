@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navigationDrawer, navController)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
 
+
     }
 
 }
