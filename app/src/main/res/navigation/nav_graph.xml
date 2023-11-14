@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.v_petr.qrandbarcodescanner.fragments.HistoryFragment"
+        android:name="com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment"
         android:label="History"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/scannerFragment"
-        android:name="com.v_petr.qrandbarcodescanner.fragments.ScannerFragment"
+        android:name="com.v_petr.qrandbarcodescanner.ui.scanner.ScannerFragment"
         android:label="Scanner Fragment"
         tools:layout="@layout/fragment_scanner"/>
     <fragment

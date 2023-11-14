@@ -2,7 +2,6 @@ package com.v_petr.qrandbarcodescanner.models
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
-import com.v_petr.qrandbarcodescanner.BR
 
 class FastenerIssuanceLog : BaseObservable {
     private var partBarcode: String = ""
@@ -25,7 +24,7 @@ class FastenerIssuanceLog : BaseObservable {
 
     fun setPartBarcode(partBarcode: String) {
         this.partBarcode = partBarcode
-        notifyPropertyChanged(BR.logRecord)
+//        notifyPropertyChanged(BR.logRecord)
     }
 
     @Bindable
@@ -35,7 +34,7 @@ class FastenerIssuanceLog : BaseObservable {
 
     fun setMaterialCode(materialCode: String) {
         this.materialCode = materialCode
-        notifyPropertyChanged(BR.logRecord)
+//        notifyPropertyChanged(BR.logRecord)
 
     }
 
@@ -46,7 +45,7 @@ class FastenerIssuanceLog : BaseObservable {
 
     fun setQty(qty: Int) {
         this.qty = qty
-        notifyPropertyChanged(BR.logRecord)
+//        notifyPropertyChanged(BR.logRecord)
 
     }
 

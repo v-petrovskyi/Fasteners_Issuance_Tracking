@@ -2,7 +2,6 @@ package com.v_petr.qrandbarcodescanner
 
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -10,21 +9,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.v_petr.qrandbarcodescanner.databinding.ActivityMainBinding
-import com.v_petr.qrandbarcodescanner.viewmodel.ScannerViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
     }
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: ScannerViewModel by viewModels()
+//    private val viewModel: ScannerViewModel by viewModels()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        viewModel.createNewFastenerIssuanceLog()
+//        viewModel.createNewFastenerIssuanceLog()
 
         val view = binding.root
         setContentView(view)
@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration.Builder(navController.graph).setOpenableLayout(drawerLayout).build()
         NavigationUI.setupWithNavController(navigationDrawer, navController)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
-
-
     }
 
 }

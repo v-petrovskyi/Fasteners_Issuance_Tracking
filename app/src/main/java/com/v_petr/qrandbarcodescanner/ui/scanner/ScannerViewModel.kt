@@ -1,34 +1,37 @@
-package com.v_petr.qrandbarcodescanner.viewmodel
+package com.v_petr.qrandbarcodescanner.ui.scanner
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.v_petr.qrandbarcodescanner.models.FastenerIssuanceLog
 
-class ScannerViewModel : ViewModel() {
+class ScannerViewModel() : ViewModel() {
 
-    private lateinit var fastenerIssuanceLog: FastenerIssuanceLog
-    private val fastenerIssuanceLogLiveData = MutableLiveData<FastenerIssuanceLog>()
+//    private lateinit var fastenerIssuanceLog: FastenerIssuanceLog
+//    private val fastenerIssuanceLogLiveData = MutableLiveData<FastenerIssuanceLog>()
     // TODO: Implement the ViewModel
 
-    fun createNewFastenerIssuanceLog() {
-        fastenerIssuanceLog = FastenerIssuanceLog()
-    }
+//    private val _materialIssueRecord = MutableLiveData<MaterialIssueRecord>()
+//    val materialIssueRecord: LiveData<MaterialIssueRecord>
+//        get() = materialIssueRecord
 
-    fun getCurrentFastenerIssuanceLog(): MutableLiveData<FastenerIssuanceLog> {
-        fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
-        return fastenerIssuanceLogLiveData
-    }
 
-    fun increaseQty() {
-        fastenerIssuanceLog.setQty(fastenerIssuanceLog.getQty() + 1)
-        fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
-    }
-
-    fun decreaseQty() {
-        fastenerIssuanceLog.setQty(fastenerIssuanceLog.getQty() - 1)
-        fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
-    }
-
+//    fun createNewFastenerIssuanceLog() {
+//        fastenerIssuanceLog = FastenerIssuanceLog()
+//    }
+//
+//    fun getCurrentFastenerIssuanceLog(): MutableLiveData<FastenerIssuanceLog> {
+//        fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
+//        return fastenerIssuanceLogLiveData
+//    }
+//
+//    fun increaseQty() {
+////        fastenerIssuanceLog.setQty(fastenerIssuanceLog.getQty() + 1)
+////        fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
+//    }
+//
+//    fun decreaseQty() {
+////        fastenerIssuanceLog.setQty(fastenerIssuanceLog.getQty() - 1)
+////        fastenerIssuanceLogLiveData.value = fastenerIssuanceLog
+////    }
+//    }
 //    private lateinit var databaseReference: DatabaseReference
     /*
     override fun onCreateView(
