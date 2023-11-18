@@ -6,5 +6,6 @@
     <color name="my_light_primary2">#89CFF3</color>
     <color name="my_light_primary3">#A0E9FF</color>
     <color name="my_light_primary4">#CDF5FD</color>
+    <color name="grey">#818181</color>
 
 </resources>

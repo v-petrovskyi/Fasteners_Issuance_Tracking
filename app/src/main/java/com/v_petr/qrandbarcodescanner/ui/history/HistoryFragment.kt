@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.v_petr.qrandbarcodescanner.databinding.FragmentHistoryBinding
@@ -22,7 +23,7 @@ class HistoryFragment : Fragment() {
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HistoryViewModel by activityViewModels()
-
+    private val adapter by lazy { MaterialItemAdapter() }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -33,20 +34,25 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.recyclerView.adapter = adapter
         viewModel.getAllRecords()
         viewModel.records.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
-                    Log.d(TAG, "onViewCreated: Loading")
+                    binding.progressBar.visibility = View.VISIBLE
                 }
 
                 is UiState.Failure -> {
                     Log.e(TAG, "onViewCreated: ${state.error}")
-
+                    Toast.makeText(context, "Failure", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
                 }
 
                 is UiState.Success -> {
-                    state.data.forEach { Log.d(TAG, "onViewCreated: $it") }
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                    adapter.updateList(state.data.toMutableList())
+                    adapter.notifyDataSetChanged()
                 }
             }
         }
