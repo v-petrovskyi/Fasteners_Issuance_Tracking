@@ -32,14 +32,12 @@ class MaterialIssueRecordRepositoryImpl(
     override fun add(materialIssueRecord: MaterialIssueRecord, result: (UiState<String>) -> Unit) {
         val reference = database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD)
             .push()
-        val key = reference.key
-        if (key != null) {
-            materialIssueRecord.key = key
-        }
+        materialIssueRecord.key = reference.key.toString()
+
         reference
             .setValue(materialIssueRecord)
             .addOnSuccessListener {
-                result.invoke(UiState.Success(key.toString()))
+                result.invoke(UiState.Success(materialIssueRecord.key))
             }.addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
             }
