@@ -29,6 +29,7 @@ class MaterialItemAdapter :
     }
     fun updateList(list: MutableList<MaterialIssueRecord>){
         this.list = list
+        notifyDataSetChanged()
     }
 
     class MaterialItemViewHolder(val binding: ItemMaterialIssueRecordBinding) :

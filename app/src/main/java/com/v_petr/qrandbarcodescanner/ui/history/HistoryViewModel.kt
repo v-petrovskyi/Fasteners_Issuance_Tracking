@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
-    val repository: MaterialIssueRecordRepository,
+    private val repository: MaterialIssueRecordRepository,
 ) : ViewModel() {
     private val _records = MutableLiveData<UiState<List<MaterialIssueRecord>>>()
     val records: LiveData<UiState<List<MaterialIssueRecord>>>

@@ -51,7 +51,6 @@ class HistoryFragment : Fragment() {
                 is UiState.Success -> {
                     binding.progressBar.visibility = View.GONE
                     adapter.updateList(state.data.toMutableList())
-                    adapter.notifyDataSetChanged()
                 }
             }
         }
