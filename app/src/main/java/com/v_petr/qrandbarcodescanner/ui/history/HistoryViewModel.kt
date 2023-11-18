@@ -33,4 +33,8 @@ class HistoryViewModel @Inject constructor(
             _addRecord.value = it
         }
     }
+
+    companion object {
+        const val TAG = "HistoryViewModel"
+    }
 }
