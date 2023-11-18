@@ -50,7 +50,6 @@ class HistoryFragment : Fragment() {
 
                 is UiState.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
                     adapter.updateList(state.data.toMutableList())
                     adapter.notifyDataSetChanged()
                 }
