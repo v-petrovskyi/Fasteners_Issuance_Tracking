@@ -14,11 +14,22 @@ class HistoryViewModel @Inject constructor(
     val repository: MaterialIssueRecordRepository,
 ) : ViewModel() {
     private val _records = MutableLiveData<UiState<List<MaterialIssueRecord>>>()
-    val record: LiveData<UiState<List<MaterialIssueRecord>>>
+    val records: LiveData<UiState<List<MaterialIssueRecord>>>
         get() = _records
+
+    private val _addRecord = MutableLiveData<UiState<String>>()
+    val addRecord: LiveData<UiState<String>>
+        get() = _addRecord
 
     fun getAllRecords() {
         _records.value = UiState.Loading
-        _records.value = repository.getAll()
+        repository.getAll { _records.value = it }
+    }
+
+    fun add() {
+        _records.value = UiState.Loading
+        repository.add(MaterialIssueRecord("test part", "test mater", 2)) {
+            _addRecord.value = it
+        }
     }
 }

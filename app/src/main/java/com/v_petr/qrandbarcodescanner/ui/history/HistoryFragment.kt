@@ -34,7 +34,7 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllRecords()
-        viewModel.record.observe(viewLifecycleOwner) { state ->
+        viewModel.records.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
                     Log.d(TAG, "onViewCreated: Loading")

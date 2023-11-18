@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
+import com.v_petr.qrandbarcodescanner.ui.history.HistoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +21,7 @@ class ScannerFragment : Fragment() {
     private var _binding: FragmentScannerBinding? = null
     private val binding get() = _binding!!
 
-//    private val viewModel: ScannerViewModel by activityViewModels()
+    private val viewModel: HistoryViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -39,9 +41,6 @@ class ScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // TODO: Use the ViewModel
-//        val fastenerIssuanceLogLiveData = viewModel.getCurrentFastenerIssuanceLog()
-//        fastenerIssuanceLogLiveData.observe(viewLifecycleOwner) { binding.materialIssueRecord = it }
-//        binding.buttonPlus.setOnClickListener { viewModel.increaseQty() }
-//        binding.buttonMinus.setOnClickListener { viewModel.decreaseQty() }
+        viewModel.add()
     }
 }

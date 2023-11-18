@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
+<!--    <data>-->
 
-<!--        <import type="com.v_petr.qrandbarcodescanner.utils.Converter"/>-->
-        <variable
-            name="materialIssueRecord"
-            type="com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord" />
-    </data>
+<!--&lt;!&ndash;        <import type="com.v_petr.qrandbarcodescanner.utils.Converter"/>&ndash;&gt;-->
+<!--        <variable-->
+<!--            name="materialIssueRecord"-->
+<!--            type="com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord" />-->
+<!--    </data>-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

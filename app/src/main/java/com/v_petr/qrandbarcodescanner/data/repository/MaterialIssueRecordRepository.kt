@@ -4,5 +4,6 @@ import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 import com.v_petr.qrandbarcodescanner.utils.UiState
 
 interface MaterialIssueRecordRepository {
-    fun getAll(): UiState<List<MaterialIssueRecord>>
+    fun getAll(result: (UiState<List<MaterialIssueRecord>>) -> Unit)
+    fun add(materialIssueRecord: MaterialIssueRecord, result: (UiState<String>) -> Unit)
 }
