@@ -2,6 +2,7 @@ package com.v_petr.qrandbarcodescanner.data.repository
 
 import android.util.Log
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 import com.google.firebase.database.ktx.getValue
 import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 import com.v_petr.qrandbarcodescanner.utils.FirebaseTables
@@ -10,6 +11,7 @@ import com.v_petr.qrandbarcodescanner.utils.UiState
 class MaterialIssueRecordRepositoryImpl(
     private val database: FirebaseDatabase,
 ) : MaterialIssueRecordRepository {
+
     override fun getAll(result: (UiState<List<MaterialIssueRecord>>) -> Unit) {
         val data = listOf<MaterialIssueRecord>()
         database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD).get()
@@ -17,7 +19,7 @@ class MaterialIssueRecordRepositoryImpl(
 
                 val materialIssueRecords = arrayListOf<MaterialIssueRecord>()
                 val map = it.getValue<HashMap<String, MaterialIssueRecord>>()
-                Log.d("TAG", "getAll: $it")
+                Log.d(TAG, "getAll: $it")
                 map?.forEach { entry ->
                     materialIssueRecords.add(entry.value)
                 }
@@ -33,6 +35,7 @@ class MaterialIssueRecordRepositoryImpl(
         val reference = database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD)
             .push()
         materialIssueRecord.key = reference.key.toString()
+        materialIssueRecord.timestamp = ServerValue.TIMESTAMP
 
         reference
             .setValue(materialIssueRecord)
@@ -42,5 +45,9 @@ class MaterialIssueRecordRepositoryImpl(
                 result.invoke(UiState.Failure(it.localizedMessage))
             }
 
+    }
+
+    companion object {
+        const val TAG = "MaterialIssueRecordRepositoryImpl"
     }
 }

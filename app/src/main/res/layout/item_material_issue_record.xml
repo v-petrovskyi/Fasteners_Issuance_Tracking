@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="com.v_petr.qrandbarcodescanner.utils.Converter"/>
         <variable
             name="item"
             type="com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord" />
@@ -10,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
+        android:layout_margin="3dp"
         android:id="@+id/item_layout"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
@@ -25,33 +26,37 @@
                 android:id="@+id/key_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:hint="TeXTdfdsfdsf dfgdfg gdfg"
                 android:text="@{item.key}"
+                android:textAlignment="textEnd"
                 android:textColor="#818181"
-                android:textSize="15sp"
+                android:textSize="8sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/part_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/date_textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/part_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
+                android:layout_marginTop="6dp"
+                android:hint="TeXTdfdsfdsf dfgdfg gdfg"
                 android:text="@{item.part}"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/material_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/key_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/date_textView" />
 
             <TextView
                 android:id="@+id/material_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
+                android:layout_marginTop="6dp"
                 android:text="@{item.material}"
+                android:textSize="14sp"
+                android:hint="TeXTdfdsfdsf dfgdfg gdfg"
                 app:layout_constraintBottom_toTopOf="@+id/qty_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,13 +66,28 @@
                 android:id="@+id/qty_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
+                android:layout_marginTop="6dp"
                 android:text="@{String.valueOf(item.qty)}"
+                android:textSize="14sp"
+                android:hint="TeXTdfdsfdsf dfgdfg gdfg"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/material_textView" />
+
+            <TextView
+                android:id="@+id/date_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="TeXTdfdsfdsf dfgdfg gdfg"
+                android:text="@{Converter.timestampToDate(item.timestamp)}"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/part_textView"
+                app:layout_constraintEnd_toStartOf="@+id/key_textView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
