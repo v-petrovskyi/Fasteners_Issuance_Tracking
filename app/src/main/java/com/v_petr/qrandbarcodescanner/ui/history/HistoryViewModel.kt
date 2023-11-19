@@ -26,9 +26,8 @@ class HistoryViewModel @Inject constructor(
         repository.getAll { _records.value = it }
     }
 
-    fun add() {
-        _records.value = UiState.Loading
-        val materialIssueRecord = MaterialIssueRecord("test part", "test mater", 2)
+    fun addMaterialIssueRecord(materialIssueRecord: MaterialIssueRecord) {
+        _addRecord.value = UiState.Loading
         repository.add(materialIssueRecord) {
             _addRecord.value = it
         }
