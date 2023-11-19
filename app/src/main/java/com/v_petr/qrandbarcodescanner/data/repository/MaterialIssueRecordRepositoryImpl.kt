@@ -14,17 +14,16 @@ class MaterialIssueRecordRepositoryImpl(
 
     override fun getAll(result: (UiState<List<MaterialIssueRecord>>) -> Unit) {
         val data = listOf<MaterialIssueRecord>()
-        database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD).get()
-            .addOnSuccessListener {
-
-                val materialIssueRecords = arrayListOf<MaterialIssueRecord>()
-                val map = it.getValue<HashMap<String, MaterialIssueRecord>>()
-                Log.d(TAG, "getAll: $it")
-                map?.forEach { entry ->
-                    materialIssueRecords.add(entry.value)
-                }
+        database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD)
+            .get()
+            .addOnSuccessListener { dataSnapshot ->
+                val list = arrayListOf<MaterialIssueRecord>()
+                val map = dataSnapshot.getValue<HashMap<String, MaterialIssueRecord>>()
+                Log.d(TAG, "getAll: $dataSnapshot")
+                map?.values?.toList()?.sortedByDescending { it.timestamp.toString().toLong() }
+                    ?.let { list.addAll(it) }
                 result.invoke(
-                    UiState.Success(materialIssueRecords)
+                    UiState.Success(list)
                 )
             }.addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
