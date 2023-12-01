@@ -23,14 +23,14 @@ class HistoryViewModel @Inject constructor(
 
     fun getAllRecords() {
         _records.value = UiState.Loading
-        repository.getAll { _records.value = it }
+        val result: (UiState<List<MaterialIssueRecord>>) -> Unit = { _records.value = it }
+        repository.getAll(result)
     }
 
     fun addMaterialIssueRecord(materialIssueRecord: MaterialIssueRecord) {
         _addRecord.value = UiState.Loading
-        repository.add(materialIssueRecord) {
-            _addRecord.value = it
-        }
+        val result: ((UiState<String>) -> Unit) = { _addRecord.value = it }
+        repository.add(materialIssueRecord, result)
     }
 
     companion object {

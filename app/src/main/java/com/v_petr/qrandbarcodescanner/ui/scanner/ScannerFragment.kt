@@ -137,7 +137,7 @@ class ScannerFragment : Fragment() {
         val options = ScanOptions()
         options.setPrompt("Volume up to flash on")
         options.setBeepEnabled(true)
-//        options.setOrientationLocked(true)
+        options.setOrientationLocked(true)
         options.captureActivity = CaptureAct::class.java
         return options
     }

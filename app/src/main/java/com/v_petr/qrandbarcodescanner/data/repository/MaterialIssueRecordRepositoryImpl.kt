@@ -13,8 +13,7 @@ class MaterialIssueRecordRepositoryImpl(
 ) : MaterialIssueRecordRepository {
 
     override fun getAll(result: (UiState<List<MaterialIssueRecord>>) -> Unit) {
-        val data = listOf<MaterialIssueRecord>()
-        database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD)
+        database.getReference("refer/" + FirebaseTables.MATERIAL_ISSUE_RECORD).limitToLast(100)
             .get()
             .addOnSuccessListener { dataSnapshot ->
                 val list = arrayListOf<MaterialIssueRecord>()
@@ -26,12 +25,13 @@ class MaterialIssueRecordRepositoryImpl(
                     UiState.Success(list)
                 )
             }.addOnFailureListener {
-                result.invoke(UiState.Failure(it.localizedMessage))
+                result.invoke(
+                    UiState.Failure(it.localizedMessage))
             }
     }
 
     override fun add(materialIssueRecord: MaterialIssueRecord, result: (UiState<String>) -> Unit) {
-        val reference = database.getReference("refer").child(FirebaseTables.MATERIAL_ISSUE_RECORD)
+        val reference = database.getReference("refer/" + FirebaseTables.MATERIAL_ISSUE_RECORD)
             .push()
         materialIssueRecord.key = reference.key.toString()
         materialIssueRecord.timestamp = ServerValue.TIMESTAMP
