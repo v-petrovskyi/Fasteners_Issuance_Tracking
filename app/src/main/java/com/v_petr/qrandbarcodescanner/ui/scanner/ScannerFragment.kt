@@ -14,6 +14,7 @@ import com.v_petr.qrandbarcodescanner.CaptureAct
 import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 import com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment
+import com.v_petr.qrandbarcodescanner.utils.EventObserver
 import com.v_petr.qrandbarcodescanner.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -64,7 +65,9 @@ class ScannerFragment : Fragment() {
                 clearFields()
             }
         }
-        viewModel.addRecord.observe(viewLifecycleOwner) { state ->
+
+        viewModel.addRecord.observe(viewLifecycleOwner, EventObserver{
+                state ->
             when (state) {
                 is UiState.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -84,8 +87,7 @@ class ScannerFragment : Fragment() {
                     enableButtons(true)
                 }
             }
-        }
-
+        })
     }
 
     private fun enableButtons(state: Boolean) {
