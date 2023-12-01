@@ -17,20 +17,10 @@ class HistoryViewModel @Inject constructor(
     val records: LiveData<UiState<List<MaterialIssueRecord>>>
         get() = _records
 
-    private val _addRecord = MutableLiveData<UiState<String>>()
-    val addRecord: LiveData<UiState<String>>
-        get() = _addRecord
-
     fun getAllRecords() {
         _records.value = UiState.Loading
         val result: (UiState<List<MaterialIssueRecord>>) -> Unit = { _records.value = it }
         repository.getAll(result)
-    }
-
-    fun addMaterialIssueRecord(materialIssueRecord: MaterialIssueRecord) {
-        _addRecord.value = UiState.Loading
-        val result: ((UiState<String>) -> Unit) = { _addRecord.value = it }
-        repository.add(materialIssueRecord, result)
     }
 
     companion object {

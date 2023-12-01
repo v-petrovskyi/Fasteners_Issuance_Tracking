@@ -14,7 +14,6 @@ import com.v_petr.qrandbarcodescanner.CaptureAct
 import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 import com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment
-import com.v_petr.qrandbarcodescanner.ui.history.HistoryViewModel
 import com.v_petr.qrandbarcodescanner.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +28,7 @@ class ScannerFragment : Fragment() {
     private var _binding: FragmentScannerBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: HistoryViewModel by activityViewModels()
+    private val viewModel: ScannerViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -48,7 +47,6 @@ class ScannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: Use the ViewModel
         binding.buttonScanMaterial.setOnClickListener {
             materialScan.launch(scanQrCode())
         }
