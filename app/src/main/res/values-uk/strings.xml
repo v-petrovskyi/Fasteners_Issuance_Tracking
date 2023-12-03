@@ -16,4 +16,5 @@
     <string name="save">Зберегти</string>
     <string name="save_and_clear">Зберегти і очистити</string>
     <string name="add_materials_codes_to_database">Добавити коди матеріалів у БД</string>
+    <string name="checkPartCode">Перевірте штрих-код деталі</string>
 </resources>

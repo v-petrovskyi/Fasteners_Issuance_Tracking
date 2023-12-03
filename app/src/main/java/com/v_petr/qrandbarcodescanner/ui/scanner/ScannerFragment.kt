@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import com.v_petr.qrandbarcodescanner.CaptureAct
+import com.v_petr.qrandbarcodescanner.R
 import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 import com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment
@@ -66,8 +68,7 @@ class ScannerFragment : Fragment() {
             }
         }
 
-        viewModel.addRecord.observe(viewLifecycleOwner, EventObserver{
-                state ->
+        viewModel.addRecord.observe(viewLifecycleOwner, EventObserver { state ->
             when (state) {
                 is UiState.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -88,6 +89,13 @@ class ScannerFragment : Fragment() {
                 }
             }
         })
+        binding.textInputLayoutPartCode.editText?.doOnTextChanged { inputText, _, _, _ ->
+            if (inputText?.length != 0 && inputText?.length!! < 13) {
+                binding.textInputLayoutPartCode.error = resources.getString(R.string.checkPartCode)
+            } else {
+                binding.textInputLayoutPartCode.error = ""
+            }
+        }
     }
 
     private fun enableButtons(state: Boolean) {
@@ -96,32 +104,33 @@ class ScannerFragment : Fragment() {
     }
 
     private fun clearFields() {
-        binding.editTextPartBarcode.setText("")
-        binding.editTextMaterialCode.setText("")
-        binding.editTextQty.setText("0")
+        binding.textInputLayoutPartCode.editText?.setText("")
+        binding.textInputLayoutMaterialCode.editText?.setText("")
+        binding.textInputLayoutQty.editText?.setText(0)
+
     }
 
     private fun save() {
         viewModel.addMaterialIssueRecord(
             MaterialIssueRecord(
-                part = binding.editTextPartBarcode.text.toString(),
-                material = binding.editTextMaterialCode.text.toString(),
-                qty = binding.editTextQty.text.toString().toInt()
+                part = binding.textInputLayoutPartCode.editText?.text.toString(),
+                material = binding.textInputLayoutMaterialCode.editText?.text.toString(),
+                qty = binding.textInputLayoutQty.editText?.text.toString().toInt()
             )
         )
 
     }
 
     private fun validate(): Boolean {
-        if (binding.editTextPartBarcode.text.toString() == "") {
+        if (binding.textInputLayoutPartCode.editText?.text.toString() == "") {
             Toast.makeText(context, "Input Part", Toast.LENGTH_SHORT).show()
             return false
-        } else if (binding.editTextMaterialCode.text.toString() == "") {
+        } else if (binding.textInputLayoutMaterialCode.editText?.text.toString() == "") {
             Toast.makeText(context, "Input Material", Toast.LENGTH_SHORT).show()
             return false
         } else {
             try {
-                if (binding.editTextQty.text.toString().toInt() <= 0) {
+                if (binding.textInputLayoutQty.editText?.text.toString().toInt() <= 0) {
                     Toast.makeText(context, "Input Qty > 0", Toast.LENGTH_SHORT).show()
                     return false
                 }
@@ -144,13 +153,13 @@ class ScannerFragment : Fragment() {
 
     private val partScan = registerForActivityResult(ScanContract()) {
         if (it.contents != null) {
-            binding.editTextPartBarcode.setText(it.contents)
+            binding.textInputLayoutPartCode.editText?.setText(it.contents)
         }
     }
 
     private val materialScan = registerForActivityResult(ScanContract()) {
         if (it.contents != null) {
-            binding.editTextMaterialCode.setText(it.contents)
+            binding.textInputLayoutMaterialCode.editText?.setText(it.contents)
         }
     }
 }
