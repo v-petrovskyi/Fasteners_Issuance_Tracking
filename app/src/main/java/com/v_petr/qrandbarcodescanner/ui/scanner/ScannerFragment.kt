@@ -13,7 +13,6 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import com.v_petr.qrandbarcodescanner.CaptureAct
 import com.v_petr.qrandbarcodescanner.R
-import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 import com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment
 import com.v_petr.qrandbarcodescanner.utils.EventObserver
@@ -50,6 +49,7 @@ class ScannerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vm = viewModel
         binding.buttonScanMaterial.setOnClickListener {
             materialScan.launch(scanQrCode())
         }
@@ -105,21 +105,11 @@ class ScannerFragment : Fragment() {
     }
 
     private fun clearFields() {
-        binding.textInputLayoutPartCode.editText?.setText("")
-        binding.textInputLayoutMaterialCode.editText?.setText("")
-        binding.textInputLayoutQty.editText?.setText(0)
-
+        viewModel.clearFieldsCurrentRecord()
     }
 
     private fun save() {
-        viewModel.addMaterialIssueRecord(
-            MaterialIssueRecord(
-                part = binding.textInputLayoutPartCode.editText?.text.toString(),
-                material = binding.textInputLayoutMaterialCode.editText?.text.toString(),
-                qty = binding.textInputLayoutQty.editText?.text.toString().toInt()
-            )
-        )
-
+        viewModel.addMaterialIssueRecord()
     }
 
     private fun validate(): Boolean {
