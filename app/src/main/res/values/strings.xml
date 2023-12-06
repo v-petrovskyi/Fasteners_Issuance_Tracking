@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Fasteners Issuance Tracking</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="scanner">Scanner</string>
     <string name="history">History</string>
