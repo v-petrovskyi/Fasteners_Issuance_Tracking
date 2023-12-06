@@ -93,7 +93,6 @@ class ScannerFragment : Fragment() {
             if (inputText?.length != 0 && inputText?.length!! < 13) {
                 binding.textInputLayoutPartCode.error = getString(R.string.checkPartCode)
             } else {
-                binding.textInputLayoutPartCode.error = ""
                 binding.textInputLayoutPartCode.isErrorEnabled = false
             }
         }
