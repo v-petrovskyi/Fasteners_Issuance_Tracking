@@ -27,4 +27,7 @@
     <string name="field_cant_be_empty">Поле не може були порожнім</string>
     <string name="input_correct_email">Введіть коректну електронну пошту</string>
     <string name="min_length_pass">Мінімальна довжина 6 символів</string>
+    <string name="login">Увійти</string>
+    <string name="forgot_password">Забули пароль?</string>
+    <string name="dont_have_an_account_sign_up">Не маєте облікового запису? Зареєструйтеся</string>
 </resources>

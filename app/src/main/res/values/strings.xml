@@ -28,4 +28,7 @@
     <string name="field_cant_be_empty">Field can\'t be empty</string>
     <string name="input_correct_email">Input correct email</string>
     <string name="min_length_pass">Min length 6 symbols</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="dont_have_an_account_sign_up">Don\'t have an account? Sign up</string>
 </resources>

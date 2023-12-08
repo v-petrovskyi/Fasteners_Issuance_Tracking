@@ -43,11 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val i =
-                if (destination.id == R.id.registerFragment) View.GONE else View.VISIBLE
+                if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment) View.GONE else View.VISIBLE
             bottomNavigationView.visibility = i
             toolbar.visibility = i
             navigationDrawer.visibility = i
-
         }
 
     }
