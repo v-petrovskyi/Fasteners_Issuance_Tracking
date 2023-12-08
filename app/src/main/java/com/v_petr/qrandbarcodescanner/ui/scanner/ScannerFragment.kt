@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
-import com.v_petr.qrandbarcodescanner.CaptureAct
 import com.v_petr.qrandbarcodescanner.R
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 import com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment
+import com.v_petr.qrandbarcodescanner.utils.CaptureAct
 import com.v_petr.qrandbarcodescanner.utils.EventObserver
 import com.v_petr.qrandbarcodescanner.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint

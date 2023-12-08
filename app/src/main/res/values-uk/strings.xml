@@ -17,4 +17,14 @@
     <string name="save_and_clear">Зберегти і очистити</string>
     <string name="add_materials_codes_to_database">Добавити коди матеріалів у БД</string>
     <string name="checkPartCode">Перевірте штрих-код деталі</string>
+    <string name="registration">Реєстрація</string>
+    <string name="first_name">Ім\'я</string>
+    <string name="last_name">Прізвище</string>
+    <string name="email">Електронна пошта</string>
+    <string name="password">Пароль</string>
+    <string name="register">Зареєструватися</string>
+    <string name="have_an_account_log_in">У вас є обліковий запис? Увійдіть</string>
+    <string name="field_cant_be_empty">Поле не може були порожнім</string>
+    <string name="input_correct_email">Введіть коректну електронну пошту</string>
+    <string name="min_length_pass">Мінімальна довжина 6 символів</string>
 </resources>

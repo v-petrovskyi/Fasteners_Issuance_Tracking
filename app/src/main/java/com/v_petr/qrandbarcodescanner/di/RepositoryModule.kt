@@ -1,6 +1,10 @@
 package com.v_petr.qrandbarcodescanner.di
 
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.v_petr.qrandbarcodescanner.data.repository.AuthRepository
+import com.v_petr.qrandbarcodescanner.data.repository.AuthRepositoryImpl
 import com.v_petr.qrandbarcodescanner.data.repository.MaterialIssueRecordRepository
 import com.v_petr.qrandbarcodescanner.data.repository.MaterialIssueRecordRepositoryImpl
 import dagger.Module
@@ -18,5 +22,14 @@ object RepositoryModule {
         database: FirebaseDatabase,
     ): MaterialIssueRecordRepository {
         return MaterialIssueRecordRepositoryImpl(database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(
+        database: FirebaseFirestore,
+        auth: FirebaseAuth
+    ): AuthRepository {
+        return AuthRepositoryImpl(database, auth)
     }
 }

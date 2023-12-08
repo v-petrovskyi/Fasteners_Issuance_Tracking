@@ -1,4 +1,4 @@
-package com.v_petr.qrandbarcodescanner
+package com.v_petr.qrandbarcodescanner.utils
 
 import com.journeyapps.barcodescanner.CaptureActivity
 
