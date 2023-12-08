@@ -2,6 +2,7 @@ package com.v_petr.qrandbarcodescanner
 
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -18,13 +19,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
-//    private val viewModel: ScannerViewModel by viewModels()
+
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-//        viewModel.createNewFastenerIssuanceLog()
 
         val view = binding.root
         setContentView(view)
@@ -36,9 +36,20 @@ class MainActivity : AppCompatActivity() {
         val navigationDrawer = binding.navigationDrawer
         val drawerLayout = binding.drawerLayout
         val toolbar = binding.toolbar
-        val appBarConfiguration = AppBarConfiguration.Builder(navController.graph).setOpenableLayout(drawerLayout).build()
+        val appBarConfiguration =
+            AppBarConfiguration.Builder(navController.graph).setOpenableLayout(drawerLayout).build()
         NavigationUI.setupWithNavController(navigationDrawer, navController)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val i =
+                if (destination.id == R.id.registerFragment) View.GONE else View.VISIBLE
+            bottomNavigationView.visibility = i
+            toolbar.visibility = i
+            navigationDrawer.visibility = i
+
+        }
+
     }
 
 }
