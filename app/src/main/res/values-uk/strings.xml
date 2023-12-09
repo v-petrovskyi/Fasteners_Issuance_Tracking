@@ -30,4 +30,6 @@
     <string name="login">Увійти</string>
     <string name="forgot_password">Забули пароль?</string>
     <string name="dont_have_an_account_sign_up">Не маєте облікового запису? Зареєструйтеся</string>
+    <string name="forgot_pass_email">Не вдається ввійти?</string>
+    <string name="send_email">"Надіслати посилання для відновлення "</string>
 </resources>

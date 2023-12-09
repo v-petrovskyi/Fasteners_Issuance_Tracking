@@ -4,6 +4,8 @@ package com.v_petr.qrandbarcodescanner
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController
+    private lateinit var drawerLayout: DrawerLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setupWithNavController(navController)
         val navigationDrawer = binding.navigationDrawer
-        val drawerLayout = binding.drawerLayout
+        drawerLayout = binding.drawerLayout
         val toolbar = binding.toolbar
         val appBarConfiguration =
             AppBarConfiguration.Builder(navController.graph).setOpenableLayout(drawerLayout).build()
@@ -47,8 +51,24 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView.visibility = i
             toolbar.visibility = i
             navigationDrawer.visibility = i
-        }
 
+            if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            }
+        }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp()
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

@@ -61,5 +61,13 @@
                 app:destination="@id/registerFragment"
                 app:popUpTo="@id/loginFragment"
                 app:popUpToInclusive="true" />
+        <action
+                android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+                app:destination="@id/forgotPasswordFragment" />
     </fragment>
+    <fragment
+            android:id="@+id/forgotPasswordFragment"
+            android:name="com.v_petr.qrandbarcodescanner.ui.auth.ForgotPasswordFragment"
+            android:label="ForgotPasswordFragment"
+            tools:layout="@layout/fragment_forgot_password"/>
 </navigation>

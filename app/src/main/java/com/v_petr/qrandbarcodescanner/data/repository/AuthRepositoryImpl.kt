@@ -1,5 +1,6 @@
 package com.v_petr.qrandbarcodescanner.data.repository
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -54,6 +55,7 @@ class AuthRepositoryImpl(
                 }
             }
             .addOnFailureListener {
+                Log.d(TAG, "loginUser: addOnFailureListener")
                 result.invoke(UiState.Failure("Authentication failed"))
             }
     }
@@ -66,11 +68,25 @@ class AuthRepositoryImpl(
                 result.invoke(UiState.Success("User has been update successfully"))
             }
             .addOnFailureListener {
+                Log.d(TAG, "updateUserInfo: addOnFailureListener")
                 result.invoke(UiState.Failure(it.localizedMessage))
             }
     }
 
-    override fun forgotPassword(user: User, result: (UiState<String>) -> Unit) {
-        TODO("Not yet implemented")
+    override fun forgotPassword(email: String, result: (UiState<String>) -> Unit) {
+        auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                result.invoke(UiState.Success("Email has been sent"))
+            }else{
+                Log.d(TAG, "forgotPassword: forgotPassword addOnCompleteListener else")
+                result.invoke(UiState.Failure(task.exception?.localizedMessage))
+            }
+        }.addOnFailureListener {
+            Log.d(TAG, "forgotPassword: forgotPassword addOnFailureListener")
+            result.invoke(UiState.Failure("Authentication failed, check email"))
+        }
+    }
+    companion object {
+        const val TAG = "AuthRepositoryImpl"
     }
 }
