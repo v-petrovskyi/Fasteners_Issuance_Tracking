@@ -8,7 +8,6 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.v_petr.qrandbarcodescanner.databinding.ActivityMainBinding
@@ -39,20 +38,17 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setupWithNavController(navController)
         val navigationDrawer = binding.navigationDrawer
         drawerLayout = binding.drawerLayout
-        val toolbar = binding.toolbar
-        val appBarConfiguration =
-            AppBarConfiguration.Builder(navController.graph).setOpenableLayout(drawerLayout).build()
+
         NavigationUI.setupWithNavController(navigationDrawer, navController)
-        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
+
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val i =
-                if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment) View.GONE else View.VISIBLE
+                if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment || destination.id == R.id.forgotPasswordFragment) View.GONE else View.VISIBLE
             bottomNavigationView.visibility = i
-            toolbar.visibility = i
             navigationDrawer.visibility = i
 
-            if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment) {
+            if (destination.id == R.id.registerFragment || destination.id == R.id.loginFragment || destination.id == R.id.forgotPasswordFragment) {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
             } else {
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
