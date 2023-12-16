@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -31,6 +32,9 @@ class ScannerFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: ScannerViewModel by activityViewModels()
+
+    private var backPressedTime: Long = 0
+    private val BACK_PRESS_INTERVAL = 2000 // 2 секунди
 
 
     override fun onCreateView(
@@ -94,6 +98,16 @@ class ScannerFragment : Fragment() {
                 binding.textInputLayoutPartCode.error = getString(R.string.checkPartCode)
             } else {
                 binding.textInputLayoutPartCode.isErrorEnabled = false
+            }
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (System.currentTimeMillis() - backPressedTime < BACK_PRESS_INTERVAL) {
+                // Якщо минуло менше BACK_PRESS_INTERVAL між натисканнями, виходимо з програми
+                activity?.finish()
+            } else {
+                Toast.makeText(requireContext(), "Натисніть ще раз для виходу", Toast.LENGTH_SHORT).show()
+                backPressedTime = System.currentTimeMillis()
             }
         }
     }
