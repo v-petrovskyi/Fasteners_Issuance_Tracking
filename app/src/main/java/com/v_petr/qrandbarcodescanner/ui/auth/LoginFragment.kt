@@ -1,13 +1,13 @@
 package com.v_petr.qrandbarcodescanner.ui.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.v_petr.qrandbarcodescanner.R
 import com.v_petr.qrandbarcodescanner.databinding.FragmentLoginBinding
@@ -24,7 +24,7 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AuthViewModel by activityViewModels()
+    private val viewModel: AuthViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
                 }
 
                 is UiState.Failure -> {
-                    Toast.makeText(context, state.error, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "observer: UiState.Failure ${state.error}")
                     binding.progressBarLogin.visibility = View.GONE
                     binding.loginButton.isEnabled = true
                 }
@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
                 is UiState.Success -> {
                     binding.progressBarLogin.visibility = View.GONE
                     binding.loginButton.isEnabled = true
-                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "observer: UiState.Success")
                     findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
                 }
             }

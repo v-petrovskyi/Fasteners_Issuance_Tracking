@@ -13,6 +13,7 @@ class AuthRepositoryImpl(
     val database: FirebaseFirestore,
     val auth: FirebaseAuth,
 ) : AuthRepository {
+
     override fun registerUser(
         email: String,
         password: String,
@@ -86,6 +87,12 @@ class AuthRepositoryImpl(
             result.invoke(UiState.Failure("Authentication failed, check email"))
         }
     }
+
+    override fun logout(result: () -> Unit) {
+        auth.signOut()
+        result.invoke()
+    }
+
     companion object {
         const val TAG = "AuthRepositoryImpl"
     }

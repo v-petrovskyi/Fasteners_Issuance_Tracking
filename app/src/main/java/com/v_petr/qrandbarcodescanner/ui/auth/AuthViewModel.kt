@@ -43,4 +43,8 @@ class AuthViewModel @Inject constructor(
         repository.forgotPassword(email) { _forgotPassword.value = it }
     }
 
+    fun logout(result: () -> Unit){
+        repository.logout(result)
+    }
+
 }
