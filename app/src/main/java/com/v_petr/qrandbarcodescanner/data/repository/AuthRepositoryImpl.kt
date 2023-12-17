@@ -1,17 +1,25 @@
 package com.v_petr.qrandbarcodescanner.data.repository
 
+import android.content.SharedPreferences
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
 import com.v_petr.qrandbarcodescanner.data.model.User
+import com.v_petr.qrandbarcodescanner.utils.FirebaseTables
+import com.v_petr.qrandbarcodescanner.utils.SharedPrefConstants
 import com.v_petr.qrandbarcodescanner.utils.UiState
+
+private const val s = "users"
 
 class AuthRepositoryImpl(
     val database: FirebaseFirestore,
     val auth: FirebaseAuth,
+    val appPreferences: SharedPreferences,
+    val gson: Gson
 ) : AuthRepository {
 
     override fun registerUser(
@@ -20,19 +28,28 @@ class AuthRepositoryImpl(
         user: User, result: (UiState<String>) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     user.id = auth.currentUser?.uid ?: ""
                     updateUserInfo(user) { state ->
                         when (state) {
-                            is UiState.Success -> result.invoke(UiState.Success("User register successfully"))
+                            is UiState.Success -> {
+                                storeSession(id = user.id) { itUser ->
+                                    if (itUser == null) {
+                                        result.invoke(UiState.Failure("User register successfully, session is not stored"))
+                                    } else {
+                                        result.invoke(UiState.Success("User register successfully"))
+                                    }
+                                }
+                            }
+
                             is UiState.Failure -> result.invoke(UiState.Failure(state.error))
                             else -> {}
                         }
                     }
                 } else {
                     try {
-                        throw it.exception ?: Exception("Invalid authentication")
+                        throw task.exception ?: Exception("Invalid authentication")
                     } catch (e: FirebaseAuthWeakPasswordException) {
                         result.invoke(UiState.Failure("Authentication failed, Password should be at least 6 characters"))
                     } catch (e: FirebaseAuthInvalidCredentialsException) {
@@ -52,7 +69,14 @@ class AuthRepositoryImpl(
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    result.invoke(UiState.Success("Login successfully"))
+                    storeSession(task.result.user?.uid ?: "") { user ->
+                        if (user == null) {
+                            result.invoke(UiState.Failure("Failed to store session"))
+
+                        } else {
+                            result.invoke(UiState.Success("Login successfully"))
+                        }
+                    }
                 }
             }
             .addOnFailureListener {
@@ -62,7 +86,7 @@ class AuthRepositoryImpl(
     }
 
     override fun updateUserInfo(user: User, result: (UiState<String>) -> Unit) {
-        val document = database.collection("users").document(user.id)
+        val document = database.collection(FirebaseTables.USERS).document(user.id)
         document
             .set(user)
             .addOnCompleteListener {
@@ -78,7 +102,7 @@ class AuthRepositoryImpl(
         auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 result.invoke(UiState.Success("Email has been sent"))
-            }else{
+            } else {
                 Log.d(TAG, "forgotPassword: forgotPassword addOnCompleteListener else")
                 result.invoke(UiState.Failure(task.exception?.localizedMessage))
             }
@@ -90,7 +114,36 @@ class AuthRepositoryImpl(
 
     override fun logout(result: () -> Unit) {
         auth.signOut()
+        appPreferences.edit().putString(SharedPrefConstants.USER_SESSION, null).apply()
         result.invoke()
+    }
+
+    override fun storeSession(id: String, result: (User?) -> Unit) {
+        database.collection(FirebaseTables.USERS).document(id)
+            .get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val user = it.result.toObject(User::class.java)
+                    appPreferences.edit()
+                        .putString(SharedPrefConstants.USER_SESSION, gson.toJson(user)).apply()
+                    result.invoke(user)
+                } else {
+                    result.invoke(null)
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(null)
+            }
+    }
+
+    override fun getSession(result: (User?) -> Unit) {
+        val userString = appPreferences.getString(SharedPrefConstants.USER_SESSION, null)
+        if (userString == null) {
+            result.invoke(null)
+        } else {
+            val user = gson.fromJson(userString, User::class.java)
+            result.invoke(user)
+        }
     }
 
     companion object {

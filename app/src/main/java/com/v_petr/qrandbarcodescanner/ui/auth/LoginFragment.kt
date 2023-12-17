@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.v_petr.qrandbarcodescanner.R
 import com.v_petr.qrandbarcodescanner.databinding.FragmentLoginBinding
 import com.v_petr.qrandbarcodescanner.utils.UiState
@@ -73,12 +74,25 @@ class LoginFragment : Fragment() {
                 is UiState.Success -> {
                     binding.progressBarLogin.visibility = View.GONE
                     binding.loginButton.isEnabled = true
-                    Log.d(TAG, "observer: UiState.Success")
+                    Log.d(TAG, "observer: UiState.Success, go to action_loginFragment_to_scannerFragment")
                     findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
                 }
             }
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getSession {
+            user ->
+            if (user != null) {
+                Log.d(TAG, "onStart: navigate to scanner fragment")
+                FirebaseAuth.getInstance().currentUser
+                Log.d(TAG, "onStart: FirebaseAuth user = ${FirebaseAuth.getInstance().currentUser}")
+                findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
+            }
+        }
     }
 
     private fun validation(): Boolean {
