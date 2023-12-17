@@ -41,6 +41,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        profileViewModel.getUser {
+            binding.textView.text = it.toString()
+        }
         binding.buttonLogout.setOnClickListener {
             authViewModel.logout {
                 findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
