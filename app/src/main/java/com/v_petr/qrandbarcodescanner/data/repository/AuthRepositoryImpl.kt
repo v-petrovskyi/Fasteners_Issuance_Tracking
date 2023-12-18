@@ -13,13 +13,11 @@ import com.v_petr.qrandbarcodescanner.utils.FirebaseTables
 import com.v_petr.qrandbarcodescanner.utils.SharedPrefConstants
 import com.v_petr.qrandbarcodescanner.utils.UiState
 
-private const val s = "users"
-
 class AuthRepositoryImpl(
-    val database: FirebaseFirestore,
-    val auth: FirebaseAuth,
-    val appPreferences: SharedPreferences,
-    val gson: Gson
+    private val database: FirebaseFirestore,
+    private val auth: FirebaseAuth,
+    private val appPreferences: SharedPreferences,
+    private val gson: Gson
 ) : AuthRepository {
 
     override fun registerUser(

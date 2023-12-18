@@ -74,7 +74,10 @@ class LoginFragment : Fragment() {
                 is UiState.Success -> {
                     binding.progressBarLogin.visibility = View.GONE
                     binding.loginButton.isEnabled = true
-                    Log.d(TAG, "observer: UiState.Success, go to action_loginFragment_to_scannerFragment")
+                    Log.d(
+                        TAG,
+                        "observer: UiState.Success, go to action_loginFragment_to_scannerFragment"
+                    )
                     findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
                 }
             }
@@ -84,11 +87,9 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getSession {
-            user ->
-            if (user != null) {
+        viewModel.getSession { user ->
+            if (user != null && FirebaseAuth.getInstance().currentUser != null) {
                 Log.d(TAG, "onStart: navigate to scanner fragment")
-                FirebaseAuth.getInstance().currentUser
                 Log.d(TAG, "onStart: FirebaseAuth user = ${FirebaseAuth.getInstance().currentUser}")
                 findNavController().navigate(R.id.action_loginFragment_to_scannerFragment)
             }
