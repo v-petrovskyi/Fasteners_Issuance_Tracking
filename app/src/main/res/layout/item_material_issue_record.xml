@@ -23,11 +23,11 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/key_textView"
+                android:id="@+id/id_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Some key"
-                android:text="@{item.key}"
+                android:text="@{item.id}"
                 android:textAlignment="textEnd"
                 android:textColor="#818181"
                 android:textSize="8sp"
@@ -79,10 +79,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="yyyy-MM-dd'T'HH:mm:ss.mmm'Z'"
-                android:text="@{Converter.timestampToDate(item.timestamp)}"
-                android:textSize="10sp"
+                android:text="@{item.timestamp.toLocaleString()}"
+                android:textSize="11sp"
                 app:layout_constraintBottom_toTopOf="@+id/part_textView"
-                app:layout_constraintEnd_toStartOf="@+id/key_textView"
+                app:layout_constraintEnd_toStartOf="@+id/id_textView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

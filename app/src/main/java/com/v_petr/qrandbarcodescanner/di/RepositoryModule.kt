@@ -21,7 +21,7 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideMaterialIssueRecordRepositoryImpl(
-        database: FirebaseDatabase,
+        database: FirebaseFirestore,
     ): MaterialIssueRecordRepository {
         return MaterialIssueRecordRepositoryImpl(database)
     }

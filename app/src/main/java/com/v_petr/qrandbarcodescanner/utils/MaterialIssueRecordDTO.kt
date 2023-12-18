@@ -3,6 +3,7 @@ package com.v_petr.qrandbarcodescanner.utils
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
+import com.google.firebase.auth.FirebaseAuth
 import com.v_petr.qrandbarcodescanner.data.model.MaterialIssueRecord
 
 object MaterialIssueRecordDTO : BaseObservable() {
@@ -25,7 +26,13 @@ object MaterialIssueRecordDTO : BaseObservable() {
             field = value
             notifyPropertyChanged(BR.qty)
         }
+
     fun toMaterialIssueRecord(): MaterialIssueRecord {
-        return MaterialIssueRecord(part, material, qty)
+        return MaterialIssueRecord(
+            part = part,
+            material = material,
+            qty = qty,
+            userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        )
     }
 }
