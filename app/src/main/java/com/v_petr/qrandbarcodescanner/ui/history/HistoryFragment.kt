@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.v_petr.qrandbarcodescanner.databinding.FragmentHistoryBinding
 import com.v_petr.qrandbarcodescanner.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,6 +55,20 @@ class HistoryFragment : Fragment() {
                 }
             }
         }
+        val itemTouchHelper = ItemTouchHelper(
+            SwipeCallback(
+                requireContext(),
+                onSwipedLeftListener = { position ->
+                    Log.d(TAG, "onViewCreated: onSwipedLeftListener $position")
+
+                },
+                onSwipedRightListener = { position ->
+                    Log.d(TAG, "onViewCreated: onSwipedRightListener $position")
+
+                })
+        )
+
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
     }
 }

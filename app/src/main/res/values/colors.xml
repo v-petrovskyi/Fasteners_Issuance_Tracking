@@ -7,5 +7,7 @@
     <color name="my_light_primary3">#A0E9FF</color>
     <color name="my_light_primary4">#CDF5FD</color>
     <color name="grey">#818181</color>
+    <color name="orange">#FF9800</color>
+    <color name="red">#B80000</color>
 
 </resources>
