@@ -144,6 +144,21 @@ class AuthRepositoryImpl(
         }
     }
 
+    override fun getUser(result: (User?) -> Unit) {
+        database.collection(FirebaseTables.USERS).document(auth.currentUser!!.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d(TAG, "getUser DocumentSnapshot data: ${document.data}")
+                    result.invoke(document.toObject(User::class.java))
+                } else {
+                    Log.d(TAG, "getUser No such document")
+                }
+            }.addOnFailureListener { exception ->
+                Log.d(TAG, "getUser get failed with ", exception)
+            }
+    }
+
     companion object {
         const val TAG = "AuthRepositoryImpl"
     }

@@ -1,23 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.profile.ProfileFragment">
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hello Profile"
-                android:id="@+id/textView" />
-
         <Button
-                android:text="Button"
+                android:id="@+id/button_logout"
+                android:text="@string/log_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ProgressBar
+                android:id="@+id/progressBar_profile"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_profile_firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button_logout" />
-    </LinearLayout>
+                android:layout_margin="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_profile_lastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_profile_firstName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_profile_lastName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <ImageButton
+                android:id="@+id/imageButton_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_done_24"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/guideline" />
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_edit_24"
+                android:id="@+id/imageButton_edit"
+                android:layout_margin="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton_done"
+                app:layout_constraintBottom_toTopOf="@+id/guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/guideline"
+                app:layout_constraintGuide_begin="60dp"
+                android:orientation="horizontal" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
