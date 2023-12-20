@@ -9,6 +9,8 @@ import com.v_petr.qrandbarcodescanner.data.repository.AuthRepository
 import com.v_petr.qrandbarcodescanner.data.repository.AuthRepositoryImpl
 import com.v_petr.qrandbarcodescanner.data.repository.MaterialIssueRecordRepository
 import com.v_petr.qrandbarcodescanner.data.repository.MaterialIssueRecordRepositoryImpl
+import com.v_petr.qrandbarcodescanner.data.repository.PartCodeRepository
+import com.v_petr.qrandbarcodescanner.data.repository.PartCodeRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,13 +30,21 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(
+    fun provideAuthRepositoryImpl(
         database: FirebaseFirestore,
         auth: FirebaseAuth,
         appPreferences: SharedPreferences,
         gson: Gson
     ): AuthRepository {
         return AuthRepositoryImpl(database, auth, appPreferences, gson)
+    }
+
+    @Provides
+    @Singleton
+    fun providePartCodeRepositoryImpl(
+        database: FirebaseDatabase
+    ): PartCodeRepository {
+        return PartCodeRepositoryImpl(database)
     }
 
 }

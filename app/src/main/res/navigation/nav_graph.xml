@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_uploading_new_material_codes" />
     <fragment
         android:id="@+id/nav_new_part_codes_menu"
-        android:name="com.v_petr.qrandbarcodescanner.fragments.UploadingNewPartCodesFragment"
+        android:name="com.v_petr.qrandbarcodescanner.ui.UploadingNewPartCodesFragment"
         android:label="Uploading new part codes"
         tools:layout="@layout/fragment_uploading_new_part_codes" />
     <fragment
