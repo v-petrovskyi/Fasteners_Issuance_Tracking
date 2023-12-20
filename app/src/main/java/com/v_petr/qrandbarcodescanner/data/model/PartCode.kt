@@ -3,5 +3,5 @@ package com.v_petr.qrandbarcodescanner.data.model
 data class PartCode(
     var owner: String = "",
     var order: String = "",
-    var barCode: Long = 0,
+    var barCode: String = "",
 )

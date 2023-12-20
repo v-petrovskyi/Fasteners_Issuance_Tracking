@@ -88,7 +88,7 @@ class UploadingNewPartCodesFragment : Fragment() {
                         val currentRow = sheet.getRow(rowIndex)
                         val owner = currentRow.getCell(0).rawValue.toString()
                         val order = currentRow.getCell(1).toString()
-                        val barCode = currentRow.getCell(2).rawValue.toString().toLong()
+                        val barCode = currentRow.getCell(2).rawValue.toString()
 
                         list.add(PartCode(owner, order, barCode))
                     }

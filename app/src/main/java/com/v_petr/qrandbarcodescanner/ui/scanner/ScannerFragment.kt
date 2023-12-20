@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
-import com.v_petr.qrandbarcodescanner.R
 import com.v_petr.qrandbarcodescanner.databinding.FragmentScannerBinding
 import com.v_petr.qrandbarcodescanner.ui.history.HistoryFragment
 import com.v_petr.qrandbarcodescanner.utils.CaptureAct
@@ -93,11 +92,28 @@ class ScannerFragment : Fragment() {
                 }
             }
         })
+        viewModel.partDescription.observe(viewLifecycleOwner) {
+            when (it) {
+                is UiState.Loading -> {
+                    binding.textInputLayoutPartCode.isErrorEnabled = false
+                }
+
+                is UiState.Failure -> {
+                    binding.textInputLayoutPartCode.error = it.error
+                    binding.textInputLayoutPartCode.isHelperTextEnabled = false
+                }
+
+                is UiState.Success -> {
+                    binding.textInputLayoutPartCode.isErrorEnabled = false
+                    binding.textInputLayoutPartCode.helperText = it.data.toString()
+                }
+            }
+        }
         binding.textInputLayoutPartCode.editText?.doOnTextChanged { inputText, _, _, _ ->
-            if (inputText?.length != 0 && inputText?.length!! < 13) {
-                binding.textInputLayoutPartCode.error = getString(R.string.checkPartCode)
-            } else {
+            if (inputText?.length == 0) {
                 binding.textInputLayoutPartCode.isErrorEnabled = false
+            } else {
+                viewModel.getPart(binding.run { textInputLayoutPartCode.editText?.text.toString() })
             }
         }
 
@@ -106,7 +122,8 @@ class ScannerFragment : Fragment() {
                 // Якщо минуло менше BACK_PRESS_INTERVAL між натисканнями, виходимо з програми
                 activity?.finish()
             } else {
-                Toast.makeText(requireContext(), "Натисніть ще раз для виходу", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Натисніть ще раз для виходу", Toast.LENGTH_SHORT)
+                    .show()
                 backPressedTime = System.currentTimeMillis()
             }
         }
@@ -119,6 +136,8 @@ class ScannerFragment : Fragment() {
 
     private fun clearFields() {
         viewModel.clearFieldsCurrentRecord()
+        binding.textInputLayoutPartCode.isErrorEnabled = false
+        binding.textInputLayoutPartCode.isHelperTextEnabled = false
     }
 
     private fun save() {

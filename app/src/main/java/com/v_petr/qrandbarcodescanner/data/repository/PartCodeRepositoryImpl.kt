@@ -1,5 +1,6 @@
 package com.v_petr.qrandbarcodescanner.data.repository
 
+import android.util.Log
 import com.google.firebase.database.FirebaseDatabase
 import com.v_petr.qrandbarcodescanner.data.model.PartCode
 import com.v_petr.qrandbarcodescanner.utils.FirebaseTables
@@ -21,13 +22,20 @@ class PartCodeRepositoryImpl(
             }
     }
 
-    override fun get(code: Long, result: (UiState<PartCode>) -> Unit) {
+    override fun get(code: String, result: (UiState<PartCode>) -> Unit) {
+        Log.d(TAG, "get: code = $code")
         database.getReference(FirebaseTables.PART_CODES)
-            .child(code.toString())
+            .child(code)
             .get()
             .addOnSuccessListener {
-                val data: PartCode = it.getValue(PartCode::class.java)!!
-                result.invoke(UiState.Success(data))
+                Log.d(TAG, "get: ${it.exists()}")
+                val data: PartCode? = it.getValue(PartCode::class.java)
+                if (data != null) {
+                    Log.d(TAG, "get: $data")
+                    result.invoke(UiState.Success(data))
+                }else{
+                    result.invoke(UiState.Failure("not found"))
+                }
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))

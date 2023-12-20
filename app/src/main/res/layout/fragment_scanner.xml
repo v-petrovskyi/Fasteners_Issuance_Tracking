@@ -1,168 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <import type="com.v_petr.qrandbarcodescanner.utils.Converter" />
 
         <variable
-            name="vm"
-            type="com.v_petr.qrandbarcodescanner.ui.scanner.ScannerViewModel" />
+                name="vm"
+                type="com.v_petr.qrandbarcodescanner.ui.scanner.ScannerViewModel" />
     </data>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".ScannerFragment">
-
-
-            <Button
-                android:id="@+id/buttonPlus"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:onClick="@{(v)->vm.increaseQty()}"
-                android:text="+"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutQty"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayoutQty"
-                app:layout_constraintTop_toTopOf="@+id/textInputLayoutQty" />
-
-            <Button
-                android:id="@+id/buttonMinus"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:onClick="@{(v)->vm.decreaseQty()}"
-                android:text="-"
-                app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutQty"
-                app:layout_constraintEnd_toStartOf="@id/textInputLayoutQty"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textInputLayoutQty" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutPartCode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="@string/part_barcode"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonScanPart"
-                app:layout_constraintEnd_toStartOf="@+id/buttonScanPart"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/buttonScanPart">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={vm.currentRecord.part}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutMaterialCode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:hint="@string/material_code"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonScanMaterial"
-                app:layout_constraintEnd_toStartOf="@+id/buttonScanMaterial"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/buttonScanMaterial">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@={vm.currentRecord.material}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <ImageButton
-                android:id="@+id/buttonScanPart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="30dp"
-                android:minHeight="48dp"
-                android:src="@drawable/baseline_document_scanner_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageButton
-                android:id="@+id/buttonScanMaterial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="30dp"
-                android:minHeight="48dp"
-                android:src="@drawable/baseline_qr_code_scanner_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonScanPart" />
-
-            <Button
-                android:id="@+id/buttonSave"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="@string/save"
-                app:layout_constraintEnd_toStartOf="@+id/buttonSaveAndClear"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutQty" />
-
-            <Button
-                android:id="@+id/buttonSaveAndClear"
-                style="@style/Widget.Material3.Button.ElevatedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save_and_clear"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/buttonSave"
-                app:layout_constraintTop_toTopOf="@+id/buttonSave"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:paddingTop="30dp"
+                tools:context=".ScannerFragment">
+
+
+            <Button
+                    android:id="@+id/buttonPlus"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="@{(v)->vm.increaseQty()}"
+                    android:text="+"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutQty"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textInputLayoutQty"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayoutQty" />
+
+            <Button
+                    android:id="@+id/buttonMinus"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:onClick="@{(v)->vm.decreaseQty()}"
+                    android:text="-"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutQty"
+                    app:layout_constraintEnd_toStartOf="@id/textInputLayoutQty"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayoutQty" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutQty"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:hint="@string/quantity"
-                app:layout_constraintEnd_toStartOf="@+id/buttonPlus"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/buttonMinus"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutMaterialCode">
+                    android:id="@+id/textInputLayoutPartCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/part_barcode"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonScanPart"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp">
 
                 <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.currentRecord.part}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutMaterialCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:hint="@string/material_code"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonScanMaterial"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPartCode">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@={vm.currentRecord.material}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageButton
+                    android:id="@+id/buttonScanPart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:minHeight="48dp"
+                    android:src="@drawable/baseline_document_scanner_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayoutPartCode"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutPartCode" />
+
+
+            <ImageButton
+                    android:id="@+id/buttonScanMaterial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:minHeight="48dp"
+                    android:src="@drawable/baseline_qr_code_scanner_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayoutMaterialCode"
+                    app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutMaterialCode" />
+
+            <Button
+                    android:id="@+id/buttonSave"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/save"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonSaveAndClear"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutQty" />
+
+            <Button
+                    android:id="@+id/buttonSaveAndClear"
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_and_clear"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/buttonSave"
+                    app:layout_constraintTop_toTopOf="@+id/buttonSave"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            <ProgressBar
+                    android:id="@+id/progressBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:text="@={Converter.intToString(vm.currentRecord.qty)}" />
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutQty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:hint="@string/quantity"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonPlus"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/buttonMinus"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutMaterialCode">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="@={Converter.intToString(vm.currentRecord.qty)}" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
