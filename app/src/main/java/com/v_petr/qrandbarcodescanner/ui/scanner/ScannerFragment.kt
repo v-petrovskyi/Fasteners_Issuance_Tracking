@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.core.widget.doOnTextChanged
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.journeyapps.barcodescanner.ScanContract
@@ -109,7 +109,12 @@ class ScannerFragment : Fragment() {
                 }
             }
         }
-        binding.textInputLayoutPartCode.editText?.doOnTextChanged { inputText, _, _, _ ->
+
+        binding.textInputLayoutPartCode.editText?.doAfterTextChanged { inputText ->
+            Log.d(
+                TAG,
+                "onViewCreated: binding.textInputLayoutPartCode.editText?.doOnTextChanged inputText =$inputText,"
+            )
             if (inputText?.length == 0) {
                 binding.textInputLayoutPartCode.isErrorEnabled = false
             } else {
