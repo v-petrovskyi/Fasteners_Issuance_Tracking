@@ -64,7 +64,7 @@ class HistoryFragment : Fragment() {
                 }
 
                 is UiState.Failure -> {
-                    Log.e(TAG, "onViewCreated: ${state.error}")
+                    Log.e(TAG, "viewModel.records.observe: ${state.error}")
                     Toast.makeText(context, "Failure", Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.GONE
                 }
