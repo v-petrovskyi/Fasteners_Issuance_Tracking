@@ -17,10 +17,19 @@ class HistoryViewModel @Inject constructor(
     val records: LiveData<UiState<List<MaterialIssueRecord>>>
         get() = _records
 
+    private val _delete = MutableLiveData<UiState<String>>()
+    val delete: LiveData<UiState<String>>
+        get() = _delete
+
     fun getAllRecords() {
         _records.value = UiState.Loading
         val result: (UiState<List<MaterialIssueRecord>>) -> Unit = { _records.value = it }
         repository.getAll(result)
+    }
+
+    fun delete(materialIssueRecord: MaterialIssueRecord) {
+        _delete.value = UiState.Loading
+        repository.delete(materialIssueRecord) { _delete.value = it }
     }
 
     companion object {

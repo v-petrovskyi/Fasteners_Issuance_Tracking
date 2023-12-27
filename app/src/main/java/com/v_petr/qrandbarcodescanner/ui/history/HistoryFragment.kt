@@ -37,6 +37,26 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = adapter
         viewModel.getAllRecords()
+
+        observe()
+        val itemTouchHelper = ItemTouchHelper(
+            SwipeCallback(
+                requireContext(),
+                // delete case
+                onSwipedLeftListener = { position ->
+                    Log.d(TAG, "onViewCreated: onSwipedLeftListener $position")
+                    viewModel.delete(adapter.getItem(position))
+                    adapter.deleteItem(position)
+                },
+                // update case
+                onSwipedRightListener = { position ->
+                    Log.d(TAG, "onViewCreated: onSwipedRightListener $position")
+                })
+        )
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
+    private fun observe() {
         viewModel.records.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UiState.Loading -> {
@@ -55,20 +75,23 @@ class HistoryFragment : Fragment() {
                 }
             }
         }
-        val itemTouchHelper = ItemTouchHelper(
-            SwipeCallback(
-                requireContext(),
-                onSwipedLeftListener = { position ->
-                    Log.d(TAG, "onViewCreated: onSwipedLeftListener $position")
+        viewModel.delete.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UiState.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
 
-                },
-                onSwipedRightListener = { position ->
-                    Log.d(TAG, "onViewCreated: onSwipedRightListener $position")
+                is UiState.Failure -> {
+                    Log.e(TAG, "viewModel.delete.observe: ${state.error}")
+                    Toast.makeText(context, "Failure", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    viewModel.getAllRecords()
+                }
 
-                })
-        )
-
-        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
-
+                is UiState.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                }
+            }
+        }
     }
 }

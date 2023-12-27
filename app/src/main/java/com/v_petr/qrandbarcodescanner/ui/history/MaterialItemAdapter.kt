@@ -27,7 +27,17 @@ class MaterialItemAdapter :
     override fun onBindViewHolder(holder: MaterialItemViewHolder, position: Int) {
         holder.bind(list[position])
     }
-    fun updateList(list: MutableList<MaterialIssueRecord>){
+
+    fun getItem(position: Int): MaterialIssueRecord {
+        return list[position]
+    }
+
+    fun deleteItem(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun updateList(list: MutableList<MaterialIssueRecord>) {
         this.list = list
         notifyDataSetChanged()
     }

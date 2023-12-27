@@ -33,10 +33,10 @@ class SwipeCallback(
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val position = viewHolder.adapterPosition
-        when {
-            direction == ItemTouchHelper.LEFT -> onSwipedLeftListener.invoke(position)
-            direction == ItemTouchHelper.RIGHT -> onSwipedRightListener.invoke(position)
+        val position = viewHolder.bindingAdapterPosition
+        when (direction) {
+            ItemTouchHelper.LEFT -> onSwipedLeftListener.invoke(position)
+            ItemTouchHelper.RIGHT -> onSwipedRightListener.invoke(position)
         }
     }
 

@@ -40,6 +40,19 @@ class MaterialIssueRecordRepositoryImpl(
             }
             }
 
+    override fun delete(
+        materialIssueRecord: MaterialIssueRecord,
+        result: (UiState<String>) -> Unit
+    ) {
+        database.collection(FirebaseTables.MATERIAL_ISSUE_RECORD).document(materialIssueRecord.id)
+            .delete().addOnSuccessListener {
+                result.invoke(UiState.Success("Deleted successfully"))
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
+    }
+
     companion object {
         const val TAG = "MaterialIssueRecordRepositoryImpl"
     }
