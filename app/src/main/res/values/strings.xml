@@ -34,4 +34,8 @@
     <string name="forgot_pass_email">Trouble logging in?</string>
     <string name="send_email">Send link</string>
     <string name="log_out">Log out</string>
+    <string name="delete">Delete</string>
+    <string name="are_you_sure_you_want_to_remove">Are you sure you want to remove</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
 </resources>

@@ -33,4 +33,8 @@
     <string name="forgot_pass_email">Не вдається ввійти?</string>
     <string name="send_email">"Надіслати посилання для відновлення "</string>
     <string name="log_out">Вийти</string>
+    <string name="delete">Видалити</string>
+    <string name="are_you_sure_you_want_to_remove">Ви дійсно хочете видалити?</string>
+    <string name="no">Ні</string>
+    <string name="yes">Так</string>
 </resources>

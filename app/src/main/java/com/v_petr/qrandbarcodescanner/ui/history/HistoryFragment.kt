@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.v_petr.qrandbarcodescanner.R
 import com.v_petr.qrandbarcodescanner.databinding.FragmentHistoryBinding
 import com.v_petr.qrandbarcodescanner.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,13 +48,13 @@ class HistoryFragment : Fragment() {
                 onSwipedLeftListener = { position ->
                     context?.let { context ->
                         MaterialAlertDialogBuilder(context)
-                            .setTitle("Delete")
-                            .setMessage("Are you sure you want to remove?")
-                            .setNegativeButton("No") { dialog, which ->
+                            .setTitle(resources.getString(R.string.delete))
+                            .setMessage(resources.getString(R.string.are_you_sure_you_want_to_remove))
+                            .setNegativeButton(resources.getString(R.string.no)) { dialog, which ->
                                 // Respond to negative button press
                                 adapter.notifyItemChanged(position)
                             }
-                            .setPositiveButton("Yes") { dialog, which ->
+                            .setPositiveButton(resources.getString(R.string.yes)) { dialog, which ->
                                 // Respond to positive button press
                                 Log.d(TAG, "onViewCreated: onSwipedLeftListener $position")
                                 viewModel.delete(adapter.getItem(position))
@@ -79,7 +80,7 @@ class HistoryFragment : Fragment() {
                 }
 
                 is UiState.Failure -> {
-                    Log.e(TAG, "viewModel.records.observe: ${state.error}")
+                    Log.e(TAG, "viewModel.records.observe: Failure ${state.error}")
                     Toast.makeText(context, "Failure", Toast.LENGTH_SHORT).show()
                     binding.progressBar.visibility = View.GONE
                 }
