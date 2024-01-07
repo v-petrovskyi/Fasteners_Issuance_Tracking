@@ -1,4 +1,4 @@
-package com.v_petr.qrandbarcodescanner.fragments
+package com.v_petr.qrandbarcodescanner.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

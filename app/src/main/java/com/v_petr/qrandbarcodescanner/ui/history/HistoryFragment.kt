@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.v_petr.qrandbarcodescanner.databinding.FragmentHistoryBinding
 import com.v_petr.qrandbarcodescanner.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,9 +45,23 @@ class HistoryFragment : Fragment() {
                 requireContext(),
                 // delete case
                 onSwipedLeftListener = { position ->
-                    Log.d(TAG, "onViewCreated: onSwipedLeftListener $position")
-                    viewModel.delete(adapter.getItem(position))
-                    adapter.deleteItem(position)
+                    context?.let { context ->
+                        MaterialAlertDialogBuilder(context)
+                            .setTitle("Delete")
+                            .setMessage("Are you sure you want to remove?")
+                            .setNegativeButton("No") { dialog, which ->
+                                // Respond to negative button press
+                                adapter.notifyItemChanged(position)
+                            }
+                            .setPositiveButton("Yes") { dialog, which ->
+                                // Respond to positive button press
+                                Log.d(TAG, "onViewCreated: onSwipedLeftListener $position")
+                                viewModel.delete(adapter.getItem(position))
+                                adapter.deleteItem(position)
+                            }
+                            .show()
+                    }
+
                 },
                 // update case
                 onSwipedRightListener = { position ->
