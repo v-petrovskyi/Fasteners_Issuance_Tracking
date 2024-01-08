@@ -67,6 +67,7 @@ class HistoryFragment : Fragment() {
                 // update case
                 onSwipedRightListener = { position ->
                     Log.d(TAG, "onViewCreated: onSwipedRightListener $position")
+                    adapter.notifyItemChanged(position)
                 })
         )
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)

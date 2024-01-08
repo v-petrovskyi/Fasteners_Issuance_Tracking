@@ -52,6 +52,13 @@ class UploadingNewPartCodesFragment : Fragment() {
             val list: List<PartCode> = readXLS(uri2)
             viewModel.upload(list)
         }
+        binding.imageButton.setOnClickListener {
+            if (binding.imageView.visibility == View.GONE) {
+                binding.imageView.visibility = View.VISIBLE
+            } else {
+                binding.imageView.visibility = View.GONE
+            }
+        }
         observe()
     }
 
