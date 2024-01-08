@@ -33,12 +33,11 @@ class MaterialIssueRecordRepositoryImpl(
             .set(materialIssueRecord)
             .addOnSuccessListener {
                 result.invoke(UiState.Success(materialIssueRecord.id))
-
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
             }
-            }
+    }
 
     override fun delete(
         materialIssueRecord: MaterialIssueRecord,

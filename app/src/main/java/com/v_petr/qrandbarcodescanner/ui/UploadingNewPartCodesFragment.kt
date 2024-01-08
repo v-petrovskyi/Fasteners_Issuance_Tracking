@@ -52,6 +52,13 @@ class UploadingNewPartCodesFragment : Fragment() {
             val list: List<PartCode> = readXLS(uri2)
             viewModel.upload(list)
         }
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.getSuccessCountLiveData().observe(viewLifecycleOwner) {
+            binding.textView3.text = viewModel.getSuccessCount().toString()
+        }
     }
 
 
@@ -64,7 +71,7 @@ class UploadingNewPartCodesFragment : Fragment() {
                 cursor.moveToFirst()
                 val fileName = cursor.getString(nameIndex)
                 uri2 = uri
-                binding.textView2.text = buildString {
+                binding.textViewFileName.text = buildString {
                     append(fileName)
                 }
             }
@@ -97,10 +104,11 @@ class UploadingNewPartCodesFragment : Fragment() {
 
                 Log.d(TAG, "readXLS: $inputStream")
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e(TAG, "readXLS: ${e.stackTrace}")
             }
             parcelFileDescriptor.close()
         }
+        Log.d(TAG, "readXLS: list.size = ${list.size}")
         return list
     }
 

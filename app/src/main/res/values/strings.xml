@@ -38,4 +38,6 @@
     <string name="are_you_sure_you_want_to_remove">Are you sure you want to remove</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="choice_file">Choice file</string>
+    <string name="upload">Upload</string>
 </resources>
